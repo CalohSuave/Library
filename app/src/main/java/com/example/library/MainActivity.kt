@@ -17,6 +17,8 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().replace(R.id.maincontainer,showDetailBook).commit()
 
         //First line to commit
+
+
     }
 
 }
