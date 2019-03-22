@@ -16,9 +16,4 @@ class ShowDetailBook : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_show_detail_book, container, false)
     }
-
-
-
-
-
 }
