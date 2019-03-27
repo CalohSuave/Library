@@ -6,15 +6,32 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ListView
 
 class ListBooks : Fragment() {
+
+    companion object {
+        var libros = "libro"
+    }
+    var libro: ArrayList<Libro> = ArrayList();
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list_books, container, false)
+
+
+        val vista = inflater.inflate(R.layout.fragment_list_books,container,false)
+        libro.add(Libro("Sex for Dummies",R.drawable.booksex,"Libro que necesita Dragomir",0))
+        libro.add(Libro("Sex for Dummies Vol 2",R.drawable.booksex,"Libro que necesita Dragomir",0))
+
+
+        var lista = vista.findViewById(R.id.lista) as ListView
+
+
+        return vista
     }
 
 
