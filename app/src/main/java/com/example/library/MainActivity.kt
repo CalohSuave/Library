@@ -12,9 +12,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        val showDetailBook = ShowDetailBook()
+        val ListView = ListBooks()
 
-        supportFragmentManager.beginTransaction().replace(R.id.maincontainer,showDetailBook).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.maincontainer,ListView).commit()
 
         //First line to commit
 

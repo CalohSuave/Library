@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_list_books.*
 
 
-
 class ShowDetailBook : Fragment() {
 
 
@@ -32,10 +31,6 @@ class ShowDetailBook : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        /*
-        lista.setOnItemLongClickListener { parent, view, position, id ->
-            listener.onButtonPressed()
-        }*/
     }
 
 
