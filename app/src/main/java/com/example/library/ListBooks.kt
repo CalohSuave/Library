@@ -46,7 +46,7 @@ class ListBooks : Fragment() {
 
         var lista = vista.findViewById(R.id.lista) as ListView
 
-        adaptador = AdapterCustom(requireContext(),libro)
+        adaptador = AdapterCustom(this.context!!,libro)
 
 
         lista.adapter = adaptador

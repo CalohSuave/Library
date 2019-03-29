@@ -5,17 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import android.widget.CheckBox
+
 import android.widget.ImageView
 import android.widget.TextView
 import kotlinx.android.synthetic.main.detail_item.view.*
 
-class AdapterCustom(val context: Context , val items:ArrayList<Libro>): BaseAdapter(){
+class AdapterCustom(private val context: Context, private val items:ArrayList<Libro>): BaseAdapter(){
 
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
-        val vista: View = convertView ?: LayoutInflater.from(context).inflate(R.layout.detail_item, parent)
+        val vista: View = convertView ?: LayoutInflater.from(context).inflate(R.layout.detail_item, null)
 
         val holder: ViewHolder = vista.tag as? ViewHolder ?: ViewHolder(vista)
         vista.tag = holder
