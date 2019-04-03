@@ -5,18 +5,26 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.fragment_list_books.*
+import kotlinx.android.synthetic.main.fragment_show_detail_book.*
 
 
 class ShowDetailBook : Fragment() {
 
+    private lateinit var title:String
+    private var cover:Int = 0
+    private lateinit var description:String
 
+        companion object {
+            fun newInstance(book: Libro): ShowDetailBook{
+                val showDetailBook = ShowDetailBook()
+                val args = Bundle()
+                args.putParcelable("book", book)
+                showDetailBook.arguments = args
 
-    interface OnButtonPressedListener{
-        fun onButtonPressed(books : Libro)
-    }
+                return showDetailBook
+            }
 
-    private lateinit var listener: OnButtonPressedListener
+        }
 
 
     override fun onCreateView(
@@ -31,13 +39,20 @@ class ShowDetailBook : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        val libro = arguments!!.getParcelable<Libro>("book") ?: Libro.getEmptyLibro()
+
+        updateText(libro)
+
+    }
+
+    fun updateText(libro: Libro) {
+        iv_portrait_detail.setImageResource(libro.cover)
+        tv_nameBook.text = libro.title
+        tv_description.text=libro.description
+
     }
 
 
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        listener = activity as OnButtonPressedListener
-    }
     }
 
 

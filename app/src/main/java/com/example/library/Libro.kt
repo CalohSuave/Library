@@ -34,8 +34,12 @@ class Libro(title:String, cover:Int, description:String, favourite:Int):Parcelab
     }
 
     companion object CREATOR : Parcelable.Creator<Libro> {
+        fun getEmptyLibro(): Libro {
+            return Libro(title = "",cover = 0,description = "",favourite = 0)
+        }
         override fun createFromParcel(parcel: Parcel): Libro {
             return Libro(parcel)
+
         }
 
         override fun newArray(size: Int): Array<Libro?> {
