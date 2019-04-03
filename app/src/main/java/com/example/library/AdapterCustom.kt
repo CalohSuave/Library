@@ -15,6 +15,8 @@ class AdapterCustom(private val context: Context, private val items:ArrayList<Li
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
+
+        // SI PONES PARENT NO APARECE
         val vista: View = convertView ?: LayoutInflater.from(context).inflate(R.layout.detail_item, null)
 
         val holder: ViewHolder = vista.tag as? ViewHolder ?: ViewHolder(vista)
@@ -37,10 +39,10 @@ class AdapterCustom(private val context: Context, private val items:ArrayList<Li
         holder.cover.setImageResource(item.cover)
 
 
-        holder.favourite.setOnClickListener {
+        /*holder.favourite.setOnClickListener {
 
             item.favourite =1
-        }
+        }*/
         return vista
 
     }
@@ -61,7 +63,7 @@ class AdapterCustom(private val context: Context, private val items:ArrayList<Li
     private class ViewHolder(vista: View){
         val titulo: TextView = vista.tv_title_detail
         val cover: ImageView = vista.iv_portrait_detail
-        val favourite: TextView = vista.cb_detail
+        /*val favourite: TextView = vista.cb_detail*/
     }
 
 
