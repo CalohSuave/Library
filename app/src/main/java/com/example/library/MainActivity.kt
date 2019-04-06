@@ -9,8 +9,6 @@ class MainActivity : AppCompatActivity(), ListBooks.OnButtonPressedListener{
 
         val detailFragment = ShowDetailBook.newInstance(books)
         supportFragmentManager.beginTransaction().replace(R.id.maincontainer,detailFragment).addToBackStack(null).commit()
-
-
     }
 
 
@@ -19,8 +17,9 @@ class MainActivity : AppCompatActivity(), ListBooks.OnButtonPressedListener{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val ListView = ListBooks()
-        supportFragmentManager.beginTransaction().replace(R.id.maincontainer,ListView).commit()
+
+        val AuthFragment = LoginFragment()
+        supportFragmentManager.beginTransaction().replace(R.id.maincontainer,AuthFragment).commit()
 
 
 

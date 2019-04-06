@@ -11,8 +11,8 @@ import android.view.ViewGroup
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val EMAIL_FRAMGENT = "emailFragment"
+private const val PASWWORD_FRAMGENT = "passwordFragment"
 
 /**
  * A simple [Fragment] subclass.
@@ -25,15 +25,18 @@ private const val ARG_PARAM2 = "param2"
  */
 class LoginFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var emailLoginFragment:String
+    private lateinit var passwordLoginFragment:String
+
     private var listener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+
+            //falta rellenar los campos
+
+
         }
     }
 
@@ -96,11 +99,11 @@ class LoginFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(emailFragment: String, passwordFragment: String) =
             LoginFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putString(ARG_PARAM1, emailFragment)
+                    putString(ARG_PARAM2, passwordFragment)
                 }
             }
     }
