@@ -11,18 +11,18 @@ import android.widget.ListView
 
 
 
-class ListBooks : Fragment() {
+class ListBooksFragment : Fragment() {
 
-    var libro: ArrayList<Libro> = ArrayList()
+    var libro: ArrayList<Book> = ArrayList()
 
     interface OnButtonPressedListener{
-        fun onButton(books : Libro)
+        fun onButton(books : Book)
     }
 
     private lateinit var listener: OnButtonPressedListener
 
 
-    lateinit var adaptador: AdapterCustom
+    lateinit var adaptador: CustomAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,18 +34,18 @@ class ListBooks : Fragment() {
 
         val vista = inflater.inflate(R.layout.fragment_list_books,container,false)
 
-        libro.add(Libro("Hunger Games ",R.drawable.hg,"Libro que necesita Dragomir",0))
-        libro.add(Libro("Sex for Dummies",R.drawable.booksex,"Libro que necesita Dragomir",0))
-        libro.add(Libro("The Benefits of being an octopus",R.drawable.oct,"Libro que necesita Dragomir",0))
-        libro.add(Libro("One Last Good Day",R.drawable.olgd,"Libro que necesita Dragomir",0))
-        libro.add(Libro("Security a novel",R.drawable.security,"Libro que necesita Dragomir",0))
-        libro.add(Libro("IT",R.drawable.it,"Libro que necesita Dragomir",0))
-        libro.add(Libro("Harry Potter",R.drawable.hp,"Libro que necesita Dragomir",0))
+        libro.add(Book("Hunger Games ",R.drawable.hg,"Libro que necesita Dragomir",0))
+        libro.add(Book("Sex for Dummies",R.drawable.booksex,"Libro que necesita Dragomir",0))
+        libro.add(Book("The Benefits of being an octopus",R.drawable.oct,"Libro que necesita Dragomir",0))
+        libro.add(Book("One Last Good Day",R.drawable.olgd,"Libro que necesita Dragomir",0))
+        libro.add(Book("Security a novel",R.drawable.security,"Libro que necesita Dragomir",0))
+        libro.add(Book("IT",R.drawable.it,"Libro que necesita Dragomir",0))
+        libro.add(Book("Harry Potter",R.drawable.hp,"Libro que necesita Dragomir",0))
 
 
         var lista = vista.findViewById(R.id.lista) as ListView
 
-        adaptador = AdapterCustom(this.context!!,libro)
+        adaptador = CustomAdapter(this.context!!,libro)
 
 
         lista.adapter = adaptador

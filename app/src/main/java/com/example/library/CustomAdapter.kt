@@ -10,7 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import kotlinx.android.synthetic.main.detail_item.view.*
 
-class AdapterCustom(private val context: Context, private val items:ArrayList<Libro>): BaseAdapter(){
+class CustomAdapter(private val context: Context, private val items:ArrayList<Book>): BaseAdapter(){
 
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
@@ -47,7 +47,7 @@ class AdapterCustom(private val context: Context, private val items:ArrayList<Li
 
     }
 
-    override fun getItem(position: Int): Libro {
+    override fun getItem(position: Int): Book {
         return items[position]
     }
 

@@ -8,15 +8,15 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_show_detail_book.*
 
 
-class ShowDetailBook : Fragment() {
+class ShowDetailBookFragment : Fragment() {
 
     private lateinit var title:String
     private var cover:Int = 0
     private lateinit var description:String
 
         companion object {
-            fun newInstance(book: Libro): ShowDetailBook{
-                val showDetailBook = ShowDetailBook()
+            fun newInstance(book: Book): ShowDetailBookFragment{
+                val showDetailBook = ShowDetailBookFragment()
                 val args = Bundle()
                 args.putParcelable("book", book)
                 showDetailBook.arguments = args
@@ -39,13 +39,13 @@ class ShowDetailBook : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val libro = arguments!!.getParcelable<Libro>("book") ?: Libro.getEmptyLibro()
+        val libro = arguments!!.getParcelable<Book>("book") ?: Book.getEmptyLibro()
 
         updateText(libro)
 
     }
 
-    fun updateText(libro: Libro) {
+    fun updateText(libro: Book) {
         iv_portrait_detail.setImageResource(libro.cover)
         tv_nameBook.text = libro.title
         tv_description.text=libro.description

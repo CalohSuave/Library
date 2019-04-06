@@ -3,11 +3,11 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 
 
-class MainActivity : AppCompatActivity(), ListBooks.OnButtonPressedListener{
+class MainActivity : AppCompatActivity(), ListBooksFragment.OnButtonPressedListener{
 
-    override fun onButton(books: Libro) {
+    override fun onButton(books: Book) {
 
-        val detailFragment = ShowDetailBook.newInstance(books)
+        val detailFragment = ShowDetailBookFragment.newInstance(books)
         supportFragmentManager.beginTransaction().replace(R.id.maincontainer,detailFragment).addToBackStack(null).commit()
 
 
@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity(), ListBooks.OnButtonPressedListener{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val ListView = ListBooks()
+        val ListView = ListBooksFragment()
         supportFragmentManager.beginTransaction().replace(R.id.maincontainer,ListView).commit()
 
 

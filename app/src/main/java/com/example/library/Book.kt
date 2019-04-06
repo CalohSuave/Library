@@ -2,7 +2,7 @@ package com.example.library
 import android.os.Parcel
 import android.os.Parcelable
 
-class Libro(title:String, cover:Int, description:String, favourite:Int):Parcelable {
+class Book(title:String, cover:Int, description:String, favourite:Int):Parcelable {
     var title:String = ""
     var cover:Int = 0
     var description:String = ""
@@ -33,16 +33,16 @@ class Libro(title:String, cover:Int, description:String, favourite:Int):Parcelab
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<Libro> {
-        fun getEmptyLibro(): Libro {
-            return Libro(title = "",cover = 0,description = "",favourite = 0)
+    companion object CREATOR : Parcelable.Creator<Book> {
+        fun getEmptyLibro(): Book {
+            return Book(title = "",cover = 0,description = "",favourite = 0)
         }
-        override fun createFromParcel(parcel: Parcel): Libro {
-            return Libro(parcel)
+        override fun createFromParcel(parcel: Parcel): Book {
+            return Book(parcel)
 
         }
 
-        override fun newArray(size: Int): Array<Libro?> {
+        override fun newArray(size: Int): Array<Book?> {
             return arrayOfNulls(size)
         }
     }
