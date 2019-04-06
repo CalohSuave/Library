@@ -1,14 +1,14 @@
 package com.example.library
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_show_detail_book.*
 
 
-class ShowDetailBookFragment : Fragment() {
+class ShowDetailBookFragment : androidx.fragment.app.Fragment() {
 
     private lateinit var title:String
     private var cover:Int = 0
