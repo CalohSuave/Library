@@ -30,8 +30,6 @@ class ListBooksFragment : androidx.fragment.app.Fragment() {
     ): View? {
 
 
-
-
         val vista = inflater.inflate(R.layout.fragment_list_books,container,false)
 
         libro.add(Book("Hunger Games ",R.drawable.hg,"Libro que necesita Dragomir",0))

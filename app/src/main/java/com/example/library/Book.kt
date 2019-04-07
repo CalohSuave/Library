@@ -35,7 +35,7 @@ class Book(title:String, cover:Int, description:String, favourite:Int):Parcelabl
 
     companion object CREATOR : Parcelable.Creator<Book> {
         fun getEmptyLibro(): Book {
-            return Book(title = "",cover = 0,description = "",favourite = 0)
+            return Book(title = " ",cover = 0 ,description = " ",favourite = 0)
         }
         override fun createFromParcel(parcel: Parcel): Book {
             return Book(parcel)

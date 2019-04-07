@@ -1,7 +1,6 @@
 package com.example.library
 
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,7 +16,7 @@ private const val ARG_PARAM2 = "param2"
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [RegisterFragment.OnFragmentInteractionListener] interface
+ * [RegisterFragment.onRegisterFragment] interface
  * to handle interaction events.
  * Use the [RegisterFragment.newInstance] factory method to
  * create an instance of this fragment.
@@ -27,7 +26,10 @@ class RegisterFragment : androidx.fragment.app.Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private var listener: OnFragmentInteractionListener? = null
+
+
+
+    private lateinit  var listener: onRegisterFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,22 +52,23 @@ class RegisterFragment : androidx.fragment.app.Fragment() {
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
-    }
+    /*
+    fun onButtonPressed(text: String) {
+        listener?.onRgisterFragment(text)
+    }*/
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
+        if (context is onRegisterFragment) {
             listener = context
         } else {
-            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
+            throw RuntimeException(context.toString() + " must implement onRegisterFragment")
         }
     }
 
     override fun onDetach() {
         super.onDetach()
-        listener = null
+        listener = activity as onRegisterFragment
     }
 
     /**
@@ -79,9 +82,9 @@ class RegisterFragment : androidx.fragment.app.Fragment() {
      * (http://developer.android.com/training/basics/fragments/communicating.html)
      * for more information.
      */
-    interface OnFragmentInteractionListener {
+    interface onRegisterFragment {
         // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
+        fun onRgisterFragment(text:String)
     }
 
     companion object {
@@ -95,11 +98,11 @@ class RegisterFragment : androidx.fragment.app.Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(email: String, password: String) =
             RegisterFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putString(ARG_PARAM1, email)
+                    putString(ARG_PARAM2, password)
                 }
             }
     }
