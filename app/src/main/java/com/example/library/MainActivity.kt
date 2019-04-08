@@ -7,6 +7,9 @@ import com.example.library.RegisterFragment.onRegisterFragment
 import kotlinx.android.synthetic.main.fragment_login.*
 
 class MainActivity : AppCompatActivity(), OnButtonPressedListener, onLogindPressed, onRegisterFragment{
+    override fun onRegisterButtonPressed(email: String, name: String, Password: String) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
 
     override fun onLoginFragmentRegister() {
@@ -22,7 +25,7 @@ class MainActivity : AppCompatActivity(), OnButtonPressedListener, onLogindPress
     }
 
 
-    override fun onRgisterFragment(text: String) {
+    override fun onRegisterFragment(text: String) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

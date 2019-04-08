@@ -58,7 +58,7 @@ class RegisterFragment : androidx.fragment.app.Fragment() {
             val id: String = UUID.randomUUID().toString()
             //listener.onRegisterButtonPressed(et_fragmentEmail.text.toString(), et_fragmentUsername.text.toString(), et_fragmentPassword.text.toString())
             var user = User(id, et_fragmentEmail.text.toString(), et_fragmentUsername.text.toString(), et_fragmentPassword.text.toString(), null)
-            val userDao = UsersDatabase.
+
         }
     }
 
