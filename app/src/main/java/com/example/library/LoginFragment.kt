@@ -28,12 +28,12 @@ class LoginFragment : androidx.fragment.app.Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        buttonRegister.setOnClickListener {
+        buttonLogin.setOnClickListener {
             listener.onLoginFragmentInteraction("hola")
         }
 
-        buttonLogin.setOnClickListener {
-            listener.onLoginFragmentInteraction("adios")
+        buttonRegister.setOnClickListener {
+            listener.onLoginFragmentRegister()
         }
 
     }
@@ -68,6 +68,9 @@ class LoginFragment : androidx.fragment.app.Fragment() {
 
     interface onLogindPressed {
         fun onLoginFragmentInteraction(text: String)
+
+
+        fun onLoginFragmentRegister()
     }
 
     companion object {

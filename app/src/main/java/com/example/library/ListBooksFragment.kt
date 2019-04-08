@@ -30,16 +30,17 @@ class ListBooksFragment : androidx.fragment.app.Fragment() {
     ): View? {
 
 
-        val vista = inflater.inflate(R.layout.fragment_list_books,container,false)
+        val vista = inflater.inflate(R.layout.fragment_list_books, container, false)
 
-        libro.add(Book("Hunger Games ",R.drawable.hg,"Libro que necesita Dragomir",0))
-        libro.add(Book("Sex for Dummies",R.drawable.booksex,"Libro que necesita Dragomir",0))
-        libro.add(Book("The Benefits of being an octopus",R.drawable.oct,"Libro que necesita Dragomir",0))
-        libro.add(Book("One Last Good Day",R.drawable.olgd,"Libro que necesita Dragomir",0))
-        libro.add(Book("Security a novel",R.drawable.security,"Libro que necesita Dragomir",0))
-        libro.add(Book("IT",R.drawable.it,"Libro que necesita Dragomir",0))
-        libro.add(Book("Harry Potter",R.drawable.hp,"Libro que necesita Dragomir",0))
-
+        if (libro.isEmpty()) {
+            libro.add(Book("Hunger Games ", R.drawable.hg, "Libro que necesita Dragomir", 0))
+            libro.add(Book("Sex for Dummies", R.drawable.booksex, "Libro que necesita Dragomir", 0))
+            libro.add(Book("The Benefits of being an octopus", R.drawable.oct, "Libro que necesita Dragomir", 0))
+            libro.add(Book("One Last Good Day", R.drawable.olgd, "Libro que necesita Dragomir", 0))
+            libro.add(Book("Security a novel", R.drawable.security, "Libro que necesita Dragomir", 0))
+            libro.add(Book("IT", R.drawable.it, "Libro que necesita Dragomir", 0))
+            libro.add(Book("Harry Potter", R.drawable.hp, "Libro que necesita Dragomir", 0))
+        }
 
         var lista = vista.findViewById(R.id.lista) as ListView
 
