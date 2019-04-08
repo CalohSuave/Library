@@ -46,7 +46,7 @@ class ListBooksFragment : androidx.fragment.app.Fragment() {
 
         lista.adapter = adaptador
 
-      lista.setOnItemClickListener { parent, view, position, id ->
+      lista.setOnItemClickListener { _, _, position, _ ->
             listener.onButton(libro[position])
         }
 
