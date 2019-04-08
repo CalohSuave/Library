@@ -13,6 +13,12 @@ class MainActivity : AppCompatActivity(), OnButtonPressedListener, onLogindPress
 
         val listBooks = ListBooksFragment()
         supportFragmentManager.beginTransaction().replace(R.id.maincontainer, listBooks).addToBackStack(null).commit()
+
+
+        val registerFragment = RegisterFragment()
+        supportFragmentManager.beginTransaction().replace(R.id.maincontainer, registerFragment).addToBackStack(null)
+            .commit()
+
     }
 
 
@@ -23,9 +29,10 @@ class MainActivity : AppCompatActivity(), OnButtonPressedListener, onLogindPress
 
     override fun onLoginFragmentInteraction(text: String) {
 
-            val registerFragment = RegisterFragment()
-            supportFragmentManager.beginTransaction().replace(R.id.maincontainer, registerFragment).addToBackStack(null)
-                .commit()
+        val listBooks = ListBooksFragment()
+        supportFragmentManager.beginTransaction().replace(R.id.maincontainer, listBooks).addToBackStack(null).commit()
+
+
 
     }
 
