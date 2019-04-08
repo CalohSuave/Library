@@ -6,6 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.library.RoomDataBase.User
+import com.example.library.RoomDataBase.UserDao
+import com.example.library.RoomDataBase.UsersDatabase
+import kotlinx.android.synthetic.main.fragment_register.*
+import java.util.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -28,7 +33,6 @@ class RegisterFragment : androidx.fragment.app.Fragment() {
     private var param2: String? = null
 
 
-
     private lateinit  var listener: onRegisterFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +53,13 @@ class RegisterFragment : androidx.fragment.app.Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        buttonRegister.setOnClickListener {
+            val id: String = UUID.randomUUID().toString()
+            //listener.onRegisterButtonPressed(et_fragmentEmail.text.toString(), et_fragmentUsername.text.toString(), et_fragmentPassword.text.toString())
+            var user = User(id, et_fragmentEmail.text.toString(), et_fragmentUsername.text.toString(), et_fragmentPassword.text.toString(), null)
+            val userDao = UsersDatabase.
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -84,7 +95,8 @@ class RegisterFragment : androidx.fragment.app.Fragment() {
      */
     interface onRegisterFragment {
         // TODO: Update argument type and name
-        fun onRgisterFragment(text:String)
+        fun onRegisterFragment(text:String)
+        fun onRegisterButtonPressed(email:String, name:String, Password:String)
     }
 
     companion object {

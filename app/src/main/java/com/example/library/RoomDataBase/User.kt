@@ -10,9 +10,12 @@ import kotlin.collections.ArrayList
 data class User(@PrimaryKey
                 @ColumnInfo(name = "userid")
                 val id: String = UUID.randomUUID().toString(),
+                @ColumnInfo(name = "email")
+                val email: String,
                 @ColumnInfo(name = "username")
                 val userName: String,
                 @ColumnInfo(name = "password")
                 val password: String,
                 @ColumnInfo(name = "favouritebook")
-                val favouriteBook: ArrayList<Book>)
+                val favouriteBook: ArrayList<Book>?
+)
