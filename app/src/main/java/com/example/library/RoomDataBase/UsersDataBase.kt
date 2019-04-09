@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
 /**
  * The Room database that contains the Users table
  */
-@Database(entities = arrayOf(User::class), version = 1)
+@Database(entities = [User::class], version = 1)
 abstract class UsersDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao

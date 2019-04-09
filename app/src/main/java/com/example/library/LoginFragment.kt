@@ -56,7 +56,7 @@ class LoginFragment : androidx.fragment.app.Fragment() {
         if (context is onLogindPressed) {
             listener = context
         } else {
-            throw RuntimeException(context.toString() + " must implement onRegisterFragment")
+            throw RuntimeException(context.toString() + " must implement OnRegisterFragment")
         }
     }
 

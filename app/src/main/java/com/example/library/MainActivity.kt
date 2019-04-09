@@ -5,11 +5,11 @@ import android.view.Menu
 import androidx.appcompat.widget.Toolbar
 import com.example.library.ListBooksFragment.OnButtonPressedListener
 import com.example.library.LoginFragment.onLogindPressed
-import com.example.library.RegisterFragment.onRegisterFragment
+import com.example.library.RegisterFragment.OnRegisterFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity(), OnButtonPressedListener, onLogindPressed, onRegisterFragment{
+class MainActivity : AppCompatActivity(), OnButtonPressedListener, onLogindPressed, OnRegisterFragment{
 
 
     override fun onRegisterButtonPressed(email: String, name: String, Password: String) {

@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.library.RoomDataBase.User
-import com.example.library.RoomDataBase.UserDao
 import com.example.library.RoomDataBase.UsersDatabase
 import kotlinx.android.synthetic.main.fragment_register.*
 import java.util.*
@@ -21,7 +20,7 @@ private const val ARG_PARAM2 = "param2"
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [RegisterFragment.onRegisterFragment] interface
+ * [RegisterFragment.OnRegisterFragment] interface
  * to handle interaction events.
  * Use the [RegisterFragment.newInstance] factory method to
  * create an instance of this fragment.
@@ -33,7 +32,7 @@ class RegisterFragment : androidx.fragment.app.Fragment() {
     private var param2: String? = null
 
 
-    private lateinit  var listener: onRegisterFragment
+    private lateinit  var listener: OnRegisterFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +57,8 @@ class RegisterFragment : androidx.fragment.app.Fragment() {
             val id: String = UUID.randomUUID().toString()
             //listener.onRegisterButtonPressed(et_fragmentEmail.text.toString(), et_fragmentUsername.text.toString(), et_fragmentPassword.text.toString())
             var user = User(id, et_fragmentEmail.text.toString(), et_fragmentUsername.text.toString(), et_fragmentPassword.text.toString(), null)
+            val userDao = UsersDatabase.getInstance(activity!!.applicationContext).userDao()
+            userDao.insertUser(user)
 
         }
     }
@@ -70,16 +71,16 @@ class RegisterFragment : androidx.fragment.app.Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is onRegisterFragment) {
+        if (context is OnRegisterFragment) {
             listener = context
         } else {
-            throw RuntimeException(context.toString() + " must implement onRegisterFragment")
+            throw RuntimeException(context.toString() + " must implement OnRegisterFragment")
         }
     }
 
     override fun onDetach() {
         super.onDetach()
-        listener = activity as onRegisterFragment
+        listener = activity as OnRegisterFragment
     }
 
     /**
@@ -93,7 +94,7 @@ class RegisterFragment : androidx.fragment.app.Fragment() {
      * (http://developer.android.com/training/basics/fragments/communicating.html)
      * for more information.
      */
-    interface onRegisterFragment {
+    interface OnRegisterFragment {
         // TODO: Update argument type and name
         fun onRegisterFragment(text:String)
         fun onRegisterButtonPressed(email:String, name:String, Password:String)
