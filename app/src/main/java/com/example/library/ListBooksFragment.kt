@@ -1,11 +1,9 @@
 package com.example.library
+
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ListView
-
 
 
 class ListBooksFragment : androidx.fragment.app.Fragment() {
@@ -29,6 +27,7 @@ class ListBooksFragment : androidx.fragment.app.Fragment() {
 
         val vista = inflater.inflate(R.layout.fragment_list_books, container, false)
 
+
         if (libro.isEmpty()) {
             libro.add(Book("Hunger Games ", R.drawable.hg, "Libro que necesita Dragomir", 0))
             libro.add(Book("Sex for Dummies", R.drawable.booksex, "Libro que necesita Dragomir", 0))
@@ -51,7 +50,10 @@ class ListBooksFragment : androidx.fragment.app.Fragment() {
         }
 
         return vista
+
+
     }
+
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -59,3 +61,4 @@ class ListBooksFragment : androidx.fragment.app.Fragment() {
     }
 
 }
+
