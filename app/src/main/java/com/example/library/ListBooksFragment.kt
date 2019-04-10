@@ -10,20 +10,14 @@ class ListBooksFragment : androidx.fragment.app.Fragment() {
 
     var libro: ArrayList<Book> = ArrayList()
 
-    interface OnButtonPressedListener{
+    interface OnListBookCellPressed{
         fun onButton(books : Book)
     }
 
-    private lateinit var listener: OnButtonPressedListener
-
-
+    private lateinit var listener: OnListBookCellPressed
     lateinit var adaptador: CustomAdapter
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val vista = inflater.inflate(R.layout.fragment_list_books, container, false)
 
@@ -41,23 +35,21 @@ class ListBooksFragment : androidx.fragment.app.Fragment() {
         var lista = vista.findViewById(R.id.lista) as ListView
 
         adaptador = CustomAdapter(this.context!!,libro)
-
-
         lista.adapter = adaptador
 
-      lista.setOnItemClickListener { _, _, position, _ ->
+
+        //Celda de cada Libro
+        lista.setOnItemClickListener { _, _, position, _ ->
             listener.onButton(libro[position])
         }
 
         return vista
-
-
     }
 
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        listener = context as OnButtonPressedListener
+        listener = context as OnListBookCellPressed
     }
 
 }

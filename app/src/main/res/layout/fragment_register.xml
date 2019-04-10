@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/et_fragmentEmail"
+        android:id="@+id/et_email_registerfragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -30,10 +30,10 @@
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_fragmentUsername" />
+        app:layout_constraintTop_toBottomOf="@+id/et_username_registerfragment" />
 
     <EditText
-        android:id="@+id/et_fragmentPassword"
+        android:id="@+id/et_password_registerfragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -44,36 +44,23 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_fragmentEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/et_email_registerfragment" />
 
     <Button
-        android:id="@+id/buttonLogin"
+        android:id="@+id/bt_register_registerfragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:text="login"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.758"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_fragmentPasswordValidation" />
-
-    <Button
-        android:id="@+id/buttonRegister"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         android:text="register"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.228"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_fragmentPasswordValidation" />
+        app:layout_constraintTop_toBottomOf="@+id/et_passwordverification_registerfragment" />
 
     <EditText
-        android:id="@+id/et_fragmentPasswordValidation"
+        android:id="@+id/et_passwordverification_registerfragment"
         android:layout_width="213dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -84,13 +71,14 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_fragmentPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/et_password_registerfragment" />
 
     <EditText
-        android:id="@+id/et_fragmentUsername"
+        android:id="@+id/et_username_registerfragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
         android:hint="User Name"

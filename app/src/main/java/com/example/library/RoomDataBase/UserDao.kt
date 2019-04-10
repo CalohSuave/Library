@@ -12,8 +12,17 @@ interface UserDao {
      * Get a user by username and password.
      * @return the user from the table with a specific id.
      */
-    @Query("SELECT * FROM Users WHERE userName = :username AND password = :pswd")
+    @Query("SELECT * FROM users WHERE userName = :username AND password = :pswd")
     fun getUserByNameAndPassword(username: String, pswd: String): User
+
+    /**
+     *
+     * Get a user by username and password.
+     * @return the user from the table with a specific id.
+     */
+    /*
+    @Query("SELECT * FROM Users")
+    fun getAllUsers(): User */
 
     /**
      * Insert a user in the database. If the user already exists, replace it.
@@ -35,3 +44,4 @@ interface UserDao {
     @Query("DELETE FROM Users")
     fun deleteAllUsers()
 }
+

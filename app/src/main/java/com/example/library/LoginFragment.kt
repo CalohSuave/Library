@@ -10,30 +10,23 @@ import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : androidx.fragment.app.Fragment() {
 
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-    private lateinit var listener: onLogindPressed
-
-
+    private lateinit var listener: OnLoginFragmentPressed
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-
-        }
+        arguments?.let { }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        buttonLogin.setOnClickListener {
-            listener.onLoginFragmentInteraction("hola")
+        bt_login_loginfragment.setOnClickListener {
+            listener.isUserOnDataBase()
         }
 
-        buttonRegister.setOnClickListener {
-            listener.onLoginFragmentRegister()
+        bt_register_loginfragment.setOnClickListener {
+            listener.goToRegisterFragment(et_email_loginfragment.text.toString(),et_password_registerfragment.text.toString())
         }
 
     }
@@ -46,14 +39,10 @@ class LoginFragment : androidx.fragment.app.Fragment() {
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
-    /*
-    fun onButtonPressed(user : User) {
-        listener?.onRgisterFragment(user)
-    }*/
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is onLogindPressed) {
+        if (context is OnLoginFragmentPressed) {
             listener = context
         } else {
             throw RuntimeException(context.toString() + " must implement OnRegisterFragment")
@@ -62,15 +51,17 @@ class LoginFragment : androidx.fragment.app.Fragment() {
 
     override fun onDetach() {
         super.onDetach()
-        listener = activity as onLogindPressed
+        listener = activity as OnLoginFragmentPressed
     }
 
 
-    interface onLogindPressed {
-        fun onLoginFragmentInteraction(text: String)
+    interface OnLoginFragmentPressed {
 
+        //Click en el boton de login que hacer una query para saber si el usuario existe o no
+        fun isUserOnDataBase()
 
-        fun onLoginFragmentRegister()
+        //Click en el boton de registro y enviamos el email y password
+        fun goToRegisterFragment(email: String, password: String)
     }
 
     companion object {

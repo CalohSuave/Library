@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/et_fragmentEmail"
+        android:id="@+id/et_email_loginfragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -33,7 +33,7 @@
         app:layout_constraintTop_toBottomOf="@+id/iv_logo" />
 
     <EditText
-        android:id="@+id/et_fragmentPassword"
+        android:id="@+id/et_password_registerfragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -44,10 +44,10 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_fragmentEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/et_email_loginfragment" />
 
     <Button
-        android:id="@+id/buttonLogin"
+        android:id="@+id/bt_login_loginfragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -57,10 +57,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_fragmentPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/et_password_registerfragment" />
 
     <Button
-        android:id="@+id/buttonRegister"
+        android:id="@+id/bt_register_loginfragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -69,6 +69,6 @@
         android:text="register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/bt_login_loginfragment" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

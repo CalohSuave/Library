@@ -9,7 +9,7 @@ import kotlin.collections.ArrayList
 @Entity(tableName = "users")
 data class User(@PrimaryKey
                 @ColumnInfo(name = "userid")
-                val id: String = UUID.randomUUID().toString(),
+                val id: String,
                 @ColumnInfo(name = "email")
                 val email: String,
                 @ColumnInfo(name = "username")

@@ -1,8 +1,7 @@
 package com.example.library
-
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,34 +10,24 @@ import com.example.library.RoomDataBase.UsersDatabase
 import kotlinx.android.synthetic.main.fragment_register.*
 import java.util.*
 
+private const val ARG_EMAIL = "email"
+private const val ARG_PASSWORD = "password"
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [RegisterFragment.OnRegisterFragment] interface
- * to handle interaction events.
- * Use the [RegisterFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
 class RegisterFragment : androidx.fragment.app.Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
 
-    private lateinit  var listener: OnRegisterFragment
+    private lateinit var email: String
+    private lateinit var password: String
+
+
+    private lateinit var listener: OnRegisterFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            email = it.getString(ARG_EMAIL) ?: ""
+            password = it.getString(ARG_PASSWORD) ?: ""
         }
     }
 
@@ -53,21 +42,28 @@ class RegisterFragment : androidx.fragment.app.Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        buttonRegister.setOnClickListener {
+        et_email_registerfragment.setText(email)
+        et_password_registerfragment.setText(password)
+
+
+        bt_register_registerfragment.setOnClickListener {
+
+
             val id: String = UUID.randomUUID().toString()
-            //listener.onRegisterButtonPressed(et_fragmentEmail.text.toString(), et_fragmentUsername.text.toString(), et_fragmentPassword.text.toString())
-            var user = User(id, et_fragmentEmail.text.toString(), et_fragmentUsername.text.toString(), et_fragmentPassword.text.toString(), null)
+            var user = User(
+                id,
+                et_email_registerfragment.text.toString(),
+                et_username_registerfragment.text.toString(),
+                et_password_registerfragment.text.toString(),
+                null
+            )
             val userDao = UsersDatabase.getInstance(activity!!.applicationContext).userDao()
             userDao.insertUser(user)
+
 
         }
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    /*
-    fun onButtonPressed(text: String) {
-        listener?.onRgisterFragment(text)
-    }*/
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -83,39 +79,19 @@ class RegisterFragment : androidx.fragment.app.Fragment() {
         listener = activity as OnRegisterFragment
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
     interface OnRegisterFragment {
-        // TODO: Update argument type and name
-        fun onRegisterFragment(text:String)
-        fun onRegisterButtonPressed(email:String, name:String, Password:String)
+        fun onRegisterFragment(text: String)
+
+        fun onRegisterButtonPressed(email: String, name: String, Password: String)
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment RegisterFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(email: String, password: String) =
             RegisterFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, email)
-                    putString(ARG_PARAM2, password)
+                    putString(ARG_EMAIL, email)
+                    putString(ARG_PASSWORD, password)
                 }
             }
     }

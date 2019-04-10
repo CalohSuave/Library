@@ -8,18 +8,16 @@ import kotlinx.android.synthetic.main.fragment_show_detail_book.*
 
 class ShowDetailBookFragment : androidx.fragment.app.Fragment() {
 
-    private lateinit var title:String
-    private var cover:Int = 0
-    private lateinit var description:String
+    companion object {
 
-        companion object {
-            fun newInstance(book: Book): ShowDetailBookFragment{
-                val showDetailBook = ShowDetailBookFragment()
-                val args = Bundle()
-                args.putParcelable("book", book)
-                showDetailBook.arguments = args
+        fun newInstance(book: Book): ShowDetailBookFragment{
 
-                return showDetailBook
+            val showDetailBook = ShowDetailBookFragment()
+            val args = Bundle()
+            args.putParcelable("book", book)
+            showDetailBook.arguments = args
+
+            return showDetailBook
             }
 
         }
@@ -37,7 +35,7 @@ class ShowDetailBookFragment : androidx.fragment.app.Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val libro = arguments!!.getParcelable<Book>("book") ?: Book.getEmptyLibro()
+        val libro = arguments!!.getParcelable("book") ?: Book.getEmptyLibro()
 
         updateText(libro)
 
