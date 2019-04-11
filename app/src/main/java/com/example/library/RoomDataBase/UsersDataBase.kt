@@ -5,13 +5,13 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-/**
- * The Room database that contains the Users table
- */
-@Database(entities = [User::class], version = 1)
+@Database(entities = [User::class, Book::class, UserBook::class], version = 1)
 abstract class UsersDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao
+    abstract fun bookDao(): BookDao
+    abstract fun userBookDao(): UserBookDao
+
 
     companion object {
 

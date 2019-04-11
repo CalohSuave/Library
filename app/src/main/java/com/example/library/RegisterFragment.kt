@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.library.RoomDataBase.BookTask
 import com.example.library.RoomDataBase.User
 import com.example.library.RoomDataBase.UsersDatabase
 import kotlinx.android.synthetic.main.fragment_register.*
@@ -54,12 +55,10 @@ class RegisterFragment : androidx.fragment.app.Fragment() {
                 id,
                 et_email_registerfragment.text.toString(),
                 et_username_registerfragment.text.toString(),
-                et_password_registerfragment.text.toString(),
-                null
+                et_password_registerfragment.text.toString()
             )
             val userDao = UsersDatabase.getInstance(activity!!.applicationContext).userDao()
-            userDao.insertUser(user)
-
+            //userDao.insertUser(user)
 
         }
     }

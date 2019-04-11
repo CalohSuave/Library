@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.*
 
-@Entity(tableName = "users")
+@Entity(tableName = "book")
 data class Book(@PrimaryKey
                 @ColumnInfo(name = "bookid")
                 val id: String = UUID.randomUUID().toString(),
