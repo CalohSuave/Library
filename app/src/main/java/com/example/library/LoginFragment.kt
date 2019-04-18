@@ -5,10 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_login.*
 
 
-class LoginFragment : androidx.fragment.app.Fragment() {
+class LoginFragment : Fragment() {
 
     private lateinit var listener: OnLoginFragmentPressed
 

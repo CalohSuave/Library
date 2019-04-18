@@ -13,6 +13,12 @@ class MainActivity : AppCompatActivity(), OnListBookCellPressed, OnLoginFragment
 
 
 
+    override fun goBack() {
+
+        onBackPressed()
+    }
+
+
     override fun isUserOnDataBase() {
 
         val listBooks = ListBooksFragment()
@@ -52,8 +58,12 @@ class MainActivity : AppCompatActivity(), OnListBookCellPressed, OnLoginFragment
         setContentView(R.layout.activity_main)
 
         setSupportActionBar(toolbar as Toolbar)
-        val LoginFrag = LoginFragment()
-        supportFragmentManager.beginTransaction().replace(R.id.maincontainer,LoginFrag).commit()
+
+
+        if(savedInstanceState == null) {
+            val LoginFrag = LoginFragment()
+            supportFragmentManager.beginTransaction().replace(R.id.maincontainer, LoginFrag).commit()
+        }
 
 
     }

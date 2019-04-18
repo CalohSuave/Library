@@ -1,10 +1,12 @@
 package com.example.library
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import androidx.fragment.app.Fragment
 import com.example.library.RoomDataBase.User
 import com.example.library.RoomDataBase.UsersDatabase
 import kotlinx.android.synthetic.main.fragment_register.*
@@ -14,11 +16,15 @@ private const val ARG_EMAIL = "email"
 private const val ARG_PASSWORD = "password"
 
 
-class RegisterFragment : androidx.fragment.app.Fragment() {
+class RegisterFragment : Fragment() {
 
 
     private lateinit var email: String
     private lateinit var password: String
+
+    var emailCorrecto: Boolean = false
+    var contrasCorrect: Boolean = false
+    var usernameCorrect: Boolean = false
 
 
     private lateinit var listener: OnRegisterFragment
@@ -29,6 +35,15 @@ class RegisterFragment : androidx.fragment.app.Fragment() {
             email = it.getString(ARG_EMAIL) ?: ""
             password = it.getString(ARG_PASSWORD) ?: ""
         }
+
+
+
+
+
+
+
+
+
     }
 
     override fun onCreateView(
@@ -46,24 +61,83 @@ class RegisterFragment : androidx.fragment.app.Fragment() {
         et_password_registerfragment.setText(password)
 
 
+
         bt_register_registerfragment.setOnClickListener {
 
-
-            val id: String = UUID.randomUUID().toString()
-            var user = User(
-                id,
-                et_email_registerfragment.text.toString(),
-                et_username_registerfragment.text.toString(),
-                et_password_registerfragment.text.toString(),
-                null
-            )
-            val userDao = UsersDatabase.getInstance(activity!!.applicationContext).userDao()
-            userDao.insertUser(user)
-
-
+            if (emailCorrecto && contrasCorrect) {
+                createNewAccount(et_username_registerfragment.text.toString(),
+                    et_email_registerfragment.text.toString(),
+                    et_password_registerfragment.text.toString()
+                )}
         }
-    }
 
+        tv_goback_registerfragment.setOnClickListener {
+            listener.goBack()
+        }
+
+
+        et_username_registerfragment.addTextChangedListener(object : TextChangedListener<EditText>(et_username_registerfragment) {
+            override fun onTextChanged(target: EditText, s: Editable) {
+                val res = resources
+                val nombresErr = res.getStringArray(R.array.NameErrors)
+
+
+                if (!et_username_registerfragment.text.isNullOrEmpty()) {
+
+                    if (isAlpha(et_username_registerfragment)) {
+                        et_username_registerfragment.error = null
+                    } else {
+                        et_username_registerfragment.error = nombresErr[1]
+                    }
+                } else {
+                    et_username_registerfragment.error = nombresErr[0]
+                }
+            }
+        })
+
+        et_email_registerfragment.addTextChangedListener(object : TextChangedListener<EditText>(et_email_registerfragment) {
+            override fun onTextChanged(target: EditText, s: Editable) {
+                val res = resources
+                val nombresErr = res.getStringArray(R.array.EmailErrors)
+
+
+                if (!et_email_registerfragment.text.isNullOrEmpty()) {
+
+                    if (isEmailValid(et_email_registerfragment)) {
+                        emailCorrecto = true
+                        et_email_registerfragment.error = null
+                    } else {
+                        et_email_registerfragment.error = nombresErr[1]
+                    }
+                } else {
+                    et_email_registerfragment.error = nombresErr[0]
+                }
+            }
+        })
+
+
+
+        et_password_registerfragment.addTextChangedListener(object : TextChangedListener<EditText>(et_password_registerfragment) {
+            override fun onTextChanged(target: EditText, s: Editable) {
+                val res = resources
+                val nombresErr = res.getStringArray(R.array.PasswordError)
+
+
+                if (!et_password_registerfragment.text.isNullOrEmpty()) {
+                    if (isPasswordValid(et_password_registerfragment)) {
+                        et_password_registerfragment.error = null
+                        contrasCorrect = true
+                    } else {
+                        et_password_registerfragment.error = nombresErr[1]
+                    }
+                } else {
+                    et_password_registerfragment.error = nombresErr[0]
+                }
+            }
+        })
+
+
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -83,6 +157,8 @@ class RegisterFragment : androidx.fragment.app.Fragment() {
         fun onRegisterFragment(text: String)
 
         fun onRegisterButtonPressed(email: String, name: String, Password: String)
+
+        fun goBack()
     }
 
     companion object {
@@ -95,4 +171,29 @@ class RegisterFragment : androidx.fragment.app.Fragment() {
                 }
             }
     }
+
+
+    fun isAlpha(nombre: EditText): Boolean {
+        val name = nombre.text.toString()
+        return name.matches("[a-zA-Z ]+".toRegex())
+    }
+
+
+    fun isEmailValid(nombre: EditText): Boolean {
+        val name = nombre.text.toString()
+        return name.matches("^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}\$".toRegex())
+    }
+
+    fun isPasswordValid(nombre: EditText): Boolean {
+        val name = nombre.text.toString()
+        return name.matches("^(?=.*?[a-zA-Z])(?=.*?[0-9]).{8,}\$".toRegex())
+
+
+    }
+
+    private fun createNewAccount(username: String, email: String , password: String) {
+
+    }
+
+
 }
