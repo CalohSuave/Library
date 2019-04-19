@@ -1,12 +1,12 @@
 package com.example.library
-
 import android.content.Context
 import android.os.Bundle
 import android.view.*
 import android.widget.ListView
+import androidx.fragment.app.Fragment
 
 
-class ListBooksFragment : androidx.fragment.app.Fragment() {
+class ListBooksFragment : Fragment() {
 
     var libro: ArrayList<Book> = ArrayList()
 
