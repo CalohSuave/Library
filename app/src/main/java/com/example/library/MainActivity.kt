@@ -27,22 +27,16 @@ class MainActivity : AppCompatActivity(), OnListBookCellPressed, OnLoginFragment
     }
 
     override fun goToRegisterFragment(email: String, password: String) {
-
-
         val registerFragment = RegisterFragment.newInstance(email, password)
         supportFragmentManager.beginTransaction().replace(R.id.maincontainer, registerFragment).addToBackStack(null)
             .commit()
     }
 
-
-    override fun onRegisterButtonPressed(email: String, name: String, Password: String) {
-
+    override fun onRegisterButtonPressed(name: String, email: String, Password: String) {
+        val loginFragment = LoginFragment.newInstance(email, Password)
+        supportFragmentManager.beginTransaction().replace(R.id.maincontainer, loginFragment).addToBackStack(null)
+            .commit()
     }
-
-    override fun onRegisterFragment(text: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
 
     override fun onButton(books: Book) {
 
@@ -61,7 +55,7 @@ class MainActivity : AppCompatActivity(), OnListBookCellPressed, OnLoginFragment
 
 
         if(savedInstanceState == null) {
-            val LoginFrag = LoginFragment()
+            val LoginFrag = LoginFragment.newInstance("","")
             supportFragmentManager.beginTransaction().replace(R.id.maincontainer, LoginFrag).commit()
         }
 

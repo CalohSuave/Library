@@ -5,11 +5,10 @@ import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.library.RoomDataBase.BookTask
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import com.example.library.RoomDataBase.User
-import com.example.library.RoomDataBase.UsersDatabase
+import com.example.library.RoomDataBase.UserTask
 import kotlinx.android.synthetic.main.fragment_register.*
 import java.util.*
 
@@ -36,14 +35,6 @@ class RegisterFragment : Fragment() {
             email = it.getString(ARG_EMAIL) ?: ""
             password = it.getString(ARG_PASSWORD) ?: ""
         }
-
-
-
-
-
-
-
-
 
     }
 
@@ -75,6 +66,7 @@ class RegisterFragment : Fragment() {
         tv_goback_registerfragment.setOnClickListener {
             listener.goBack()
         }
+
 
         et_username_registerfragment.addTextChangedListener(object : TextChangedListener<EditText>(et_username_registerfragment) {
             override fun onTextChanged(target: EditText, s: Editable) {
@@ -154,9 +146,7 @@ class RegisterFragment : Fragment() {
     }
 
     interface OnRegisterFragment {
-        fun onRegisterFragment(text: String)
-
-        fun onRegisterButtonPressed(email: String, name: String, Password: String)
+        fun onRegisterButtonPressed(name: String, email: String,Password: String)
 
         fun goBack()
     }
@@ -192,7 +182,20 @@ class RegisterFragment : Fragment() {
     }
 
     private fun createNewAccount(username: String, email: String , password: String) {
+        val id: String = UUID.randomUUID().toString()
+        var user = User(
+            id,
+            et_email_registerfragment.text.toString(),
+            et_username_registerfragment.text.toString(),
+            et_password_registerfragment.text.toString()
+        )
+        UserTask(this, activity!!.applicationContext, user).execute()
+        listener.onRegisterButtonPressed("",email,password)
+    }
 
+    fun redirectLogin(user: User) {
+        // Redirigir al register to login
+        listener.onRegisterButtonPressed(user.userName, user.email, user.password)
     }
 
 

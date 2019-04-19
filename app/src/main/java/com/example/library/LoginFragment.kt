@@ -5,30 +5,53 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.library.RoomDataBase.User
+import com.example.library.RoomDataBase.UsersDatabase
 import kotlinx.android.synthetic.main.fragment_login.*
 
 
+private const val ARG_EMAIL = "email"
+private const val ARG_PASSWORD = "password"
+
 class LoginFragment : Fragment() {
+    private lateinit var email: String
+    private lateinit var password: String
 
     private lateinit var listener: OnLoginFragmentPressed
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let { }
+        arguments?.let {
+            email = it.getString(ARG_EMAIL) ?: ""
+            password = it.getString(ARG_PASSWORD) ?: ""
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        et_email_loginfragment.setText(email)
+        et_password_registerfragment.setText(password)
+
+        val userDao = UsersDatabase.getInstance(activity!!.applicationContext).userDao()
+
         bt_login_loginfragment.setOnClickListener {
-            listener.isUserOnDataBase()
+            if (userDao.isExistUser(email, password)){
+                listener.isUserOnDataBase()
+            } else {
+                Toast.makeText(activity, "Edu marica", Toast.LENGTH_SHORT).show()
+            }
+
         }
 
         bt_register_loginfragment.setOnClickListener {
             listener.goToRegisterFragment(et_email_loginfragment.text.toString(),et_password_registerfragment.text.toString())
         }
+
+
 
     }
 
@@ -66,15 +89,14 @@ class LoginFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance(email: String, password:String): LoginFragment{
-            val loginFragment = LoginFragment()
-            val args = Bundle()
-            args.putString("email", email)
-            args.putString("password", password)
-            loginFragment.arguments = args
-
-            return loginFragment
-        }
-
+        @JvmStatic
+        fun newInstance(email: String, password: String) =
+            LoginFragment().apply {
+                arguments = Bundle().apply {
+                    putString(ARG_EMAIL, email)
+                    putString(ARG_PASSWORD, password)
+                }
+            }
     }
+
 }

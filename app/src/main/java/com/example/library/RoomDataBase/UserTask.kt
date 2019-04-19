@@ -1,21 +1,27 @@
 package com.example.library.RoomDataBase
 
-import android.content.ClipData
 import android.content.Context
 import android.os.AsyncTask
+import com.example.library.RegisterFragment
 
-class UserTask(context: Context) : AsyncTask<User, Void, Void>() {
-    val userDao = UsersDatabase.getInstance(context).userDao()
-    override fun doInBackground(vararg params: User?): Void {
-        userDao.insertUser(params[0]!!)
-        return Void.TYPE.newInstance()
+class UserTask() : AsyncTask<Void, Void, Void>() {
+    lateinit var userDao: UserDao
+    lateinit var registerFragment: RegisterFragment
+    lateinit var context: Context
+    lateinit var user: User
+    override fun doInBackground(vararg params: Void?): Void? {
+        userDao.insertUser(user)
+        return null
     }
+    constructor(registerFragment: RegisterFragment, context: Context, user: User) : this() {
+        this.registerFragment = registerFragment
+        this.context = context
+        this.userDao = UsersDatabase.getInstance(context).userDao()
+        this.user = user
 
-    class UserTaskItem(item: ClipData.Item, users: List<User>) {
-        enum class action {
-            INSERT
-        }
-        val item: ClipData.Item? = null
-        val users: List<User>? = null
+    }
+    override fun onPostExecute(result: Void?) {
+        super.onPostExecute(result)
+        registerFragment.redirectLogin(user)
     }
 }

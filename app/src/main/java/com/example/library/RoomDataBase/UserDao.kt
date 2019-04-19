@@ -12,8 +12,11 @@ interface UserDao {
      * Get a user by username and password.
      * @return the user from the table with a specific id.
      */
-    @Query("SELECT * FROM user WHERE username = :username AND password = :pswd")
-    fun getUserByNameAndPassword(username: String, pswd: String): User
+    @Query("SELECT * FROM user WHERE email = :email AND password = :pswd")
+    fun getUserByEmailAndPassword(email: String, pswd: String): User
+
+    @Query("SELECT * FROM user WHERE email = :email AND password = :pswd")
+    fun isExistUser(email: String, pswd: String): Boolean
 
     /**
      * Insert a user in the database. If the user already exists, replace it.

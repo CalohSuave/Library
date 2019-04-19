@@ -13,7 +13,7 @@ interface UserBookDao {
      * @return the book from the table with a specific id.
      */
     @Query("SELECT * FROM userbook WHERE bookid = :bookid AND userid = :userid")
-    fun getFavoriteBookByBookIdAndUserId(bookid: String, userid: String): Book
+    fun getFavoriteBookByBookIdAndUserId(bookid: String, userid: String): UserBook
 
     /**
      * Insert a favorite book in the database. If the user already exists, replace it.
