@@ -50,7 +50,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintHorizontal_bias="0.497"/>
     <TextView
-            android:text="Example example exampleExample example exampleExample example exampleExample example exampleExample example exampleExample example example"
+            android:text="@string/example_example_exampleexample_example_exampleexample_example_exampleexample_example_exampleexample_example_exampleexample_example_example"
             android:layout_width="325dp"
             android:layout_height="244dp"
             android:id="@+id/tv_description" app:layout_constraintStart_toStartOf="parent"
