@@ -38,7 +38,11 @@ class LoginFragment : Fragment() {
         val userDao = UsersDatabase.getInstance(activity!!.applicationContext).userDao()
 
         bt_login_loginfragment.setOnClickListener {
-            for (i in 1..4) {
+
+
+            listener.isUserOnDataBase()
+            // THREAD EN BACKGROUND PARA COMPROBAR SI EL USUARIO EXISTE
+        /*    for (i in 1..4) {
                 Thread {
                     if (userDao.isExistUser(et_email_loginfragment.text.toString(),et_password_loginfragment.text.toString()) > 0){
                         listener.isUserOnDataBase()
@@ -47,7 +51,7 @@ class LoginFragment : Fragment() {
                         Toast.makeText(activity, "asdfasdf", Toast.LENGTH_SHORT).show()
                     }
                 }.run()
-            }
+            }*/
         }
 
         bt_register_loginfragment.setOnClickListener {

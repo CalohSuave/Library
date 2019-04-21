@@ -29,7 +29,7 @@ class ListBooksFragment : Fragment(){
 
         val vista = inflater.inflate(R.layout.fragment_list_books, container, false)
 
-
+        //Libros añadidos en local
         if (libro.isEmpty()) {
             libro.add(Book("Hunger Games ", R.drawable.hg, "Libro que necesita Dragomir", 0))
             libro.add(Book("Sex for Dummies", R.drawable.booksex, "Libro que necesita Dragomir", 0))
