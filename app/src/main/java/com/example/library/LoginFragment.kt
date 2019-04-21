@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.library.RoomDataBase.User
 import com.example.library.RoomDataBase.UsersDatabase
 import kotlinx.android.synthetic.main.fragment_login.*
 
@@ -34,24 +33,26 @@ class LoginFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         et_email_loginfragment.setText(email)
-        et_password_registerfragment.setText(password)
+        et_password_loginfragment.setText(password)
 
         val userDao = UsersDatabase.getInstance(activity!!.applicationContext).userDao()
 
         bt_login_loginfragment.setOnClickListener {
-            if (userDao.isExistUser(email, password)){
-                listener.isUserOnDataBase()
-            } else {
-                Toast.makeText(activity, "Edu marica", Toast.LENGTH_SHORT).show()
+            for (i in 1..4) {
+                Thread {
+                    if (userDao.isExistUser(et_email_loginfragment.text.toString(),et_password_loginfragment.text.toString()) > 0){
+                        listener.isUserOnDataBase()
+                        return@Thread
+                    } else {
+                        Toast.makeText(activity, "asdfasdf", Toast.LENGTH_SHORT).show()
+                    }
+                }.run()
             }
-
         }
 
         bt_register_loginfragment.setOnClickListener {
-            listener.goToRegisterFragment(et_email_loginfragment.text.toString(),et_password_registerfragment.text.toString())
+            listener.goToRegisterFragment(et_email_loginfragment.text.toString(),et_password_loginfragment.text.toString())
         }
-
-
 
     }
 
