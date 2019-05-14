@@ -43,11 +43,11 @@
         android:layout_marginEnd="8dp"
         android:autoSizeMinTextSize="12dp"
         android:autoSizeTextType="uniform"
-        android:text="TextView"
+        android:text="@string/tv_title_detail"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.153"
         app:layout_constraintStart_toEndOf="@+id/iv_portrait_detail"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" tools:targetApi="o" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

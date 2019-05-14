@@ -4,17 +4,33 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tv_login_main">tv_login_main</string>
+    <string name="favourite_books">Favourite Books</string>
+    <string name="log_out">Log Out</string>
+    <string name="tv_title_detail">TextView</string>
+    <string name="iv_logo">TODO</string>
+    <string name="et_email_loginfragment">Email</string>
+    <string name="et_password_loginfragment">Password</string>
+    <string name="bt_login_loginfragment">login</string>
+    <string name="bt_register_loginfragment">register</string>
+    <string name="et_email_registerfragment">Email</string>
+    <string name="et_password_registerfragment">Password</string>
+    <string name="tv_mss_registerfragment">Ya tienes una cuenta?</string>
+    <string name="tv_goback_registerfragment">Ir a Login</string>
+    <string name="et_username_registerfragment">User Name</string>
+    <string name="bt_register_registerfragment">register</string>
+    <string name="tv_nameBook">TextView</string>
+    <string name="iv_portrait_detail">TODO</string>
+    <string name="tv_namebook">tv_nameBook</string>
+    <string name="Example_text">example_example_exampleexample_example_exampleexample_example_exampleexample_example_exampleexample_example_exampleexample_example_example</string>
 
     <string-array name="NameErrors">
         <item>Inserte un valor</item>
         <item>Este campo no puede contener numeros</item>
-        <item></item>
     </string-array>
 
     <string-array name="EmailErrors">
         <item>Inserte un correo</item>
         <item>Inserte un email valido</item>
-        <item></item>
     </string-array>
 
 

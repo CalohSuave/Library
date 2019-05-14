@@ -10,7 +10,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity(), OnListBookCellPressed, OnLoginFragmentPressed, OnRegisterFragment{
-
+    override fun goLogin() {
+        onBackPressed()
+    }
 
 
     override fun goBack() {
@@ -62,9 +64,9 @@ class MainActivity : AppCompatActivity(), OnListBookCellPressed, OnLoginFragment
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+/*    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
         return super.onCreateOptionsMenu(menu)
-    }
+    }*/
 
 }

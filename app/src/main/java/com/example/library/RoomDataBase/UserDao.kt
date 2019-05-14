@@ -15,8 +15,8 @@ interface UserDao {
     @Query("SELECT * FROM user WHERE email = :email AND password = :pswd")
     fun getUserByEmailAndPassword(email: String, pswd: String): User
 
-    @Query("SELECT * FROM user WHERE email = :email AND password = :pswd")
-    fun isExistUser(email: String, pswd: String): Boolean
+    @Query("SELECT COUNT(*) FROM user WHERE email = :email AND password = :pswd")
+    fun isExistUser(email: String, pswd: String): Int
 
     /**
      * Insert a user in the database. If the user already exists, replace it.

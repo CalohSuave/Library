@@ -5,23 +5,31 @@ import android.view.*
 import android.widget.ListView
 import androidx.fragment.app.Fragment
 
-
-class ListBooksFragment : Fragment() {
+class ListBooksFragment : Fragment(){
 
     var libro: ArrayList<Book> = ArrayList()
 
     interface OnListBookCellPressed{
         fun onButton(books : Book)
+
+        fun goLogin()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
 
     private lateinit var listener: OnListBookCellPressed
     lateinit var adaptador: CustomAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        setHasOptionsMenu(true)
+
 
         val vista = inflater.inflate(R.layout.fragment_list_books, container, false)
 
-
+        //Libros añadidos en local
         if (libro.isEmpty()) {
             libro.add(Book("Hunger Games ", R.drawable.hg, "Libro que necesita Dragomir", 0))
             libro.add(Book("Sex for Dummies", R.drawable.booksex, "Libro que necesita Dragomir", 0))
@@ -50,6 +58,23 @@ class ListBooksFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         listener = context as OnListBookCellPressed
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return (when(item.itemId) {
+            R.id.log_out -> {
+                listener.goLogin()
+                true
+            }
+            else ->
+                super.onOptionsItemSelected(item)
+        })
     }
 
 }
