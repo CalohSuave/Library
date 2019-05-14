@@ -42,7 +42,7 @@ class LoginFragment : Fragment() {
             if (userDao.isExistUser(email, password)){
                 listener.isUserOnDataBase()
             } else {
-                Toast.makeText(activity, "Edu marica", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "anwnedoa", Toast.LENGTH_SHORT).show()
             }
 
         }
