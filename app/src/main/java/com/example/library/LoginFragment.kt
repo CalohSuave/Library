@@ -1,5 +1,4 @@
 package com.example.library
-
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.AsyncTask
@@ -11,10 +10,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.library.RoomDataBase.UsersDatabase
 import kotlinx.android.synthetic.main.fragment_login.*
-
-
-
-
 
 private const val ARG_EMAIL = "email"
 private const val ARG_PASSWORD = "password"
@@ -50,13 +45,10 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
         bt_login_loginfragment.setOnClickListener {
 
             getUserDB().execute()
         }
-
 
 
     }

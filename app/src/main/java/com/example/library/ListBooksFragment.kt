@@ -1,16 +1,31 @@
 package com.example.library
 import android.content.Context
+import android.os.AsyncTask
 import android.os.Bundle
 import android.view.*
+import android.widget.AdapterView
 import android.widget.ListView
 import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.fragment_list_books.*
 
-class ListBooksFragment : Fragment(){
+import org.json.JSONException
+import org.json.JSONObject
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.io.Reader
+import java.lang.RuntimeException
+import java.net.HttpURLConnection
+import java.net.URL
+
+class ListBooksFragment : Fragment() {
 
     var libro: ArrayList<Book> = ArrayList()
+    private lateinit var listener: OnListBookCellPressed
+    lateinit var adaptador: CustomAdapter
 
-    interface OnListBookCellPressed{
-        fun onButton(books : Book)
+
+    interface OnListBookCellPressed {
+        fun onButton(books: Book)
 
         fun goLogin()
     }
@@ -20,38 +35,20 @@ class ListBooksFragment : Fragment(){
         setHasOptionsMenu(true)
     }
 
-    private lateinit var listener: OnListBookCellPressed
-    lateinit var adaptador: CustomAdapter
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
 
 
-        val vista = inflater.inflate(R.layout.fragment_list_books, container, false)
+       return inflater.inflate(R.layout.fragment_list_books, container, false)
 
-        //Libros añadidos en local
-        if (libro.isEmpty()) {
-            libro.add(Book("Hunger Games ", R.drawable.hg, "Libro que necesita Dragomir", 0))
-            libro.add(Book("Sex for Dummies", R.drawable.booksex, "Libro que necesita Dragomir", 0))
-            libro.add(Book("The Benefits of being an octopus", R.drawable.oct, "Libro que necesita Dragomir", 0))
-            libro.add(Book("One Last Good Day", R.drawable.olgd, "Libro que necesita Dragomir", 0))
-            libro.add(Book("Security a novel", R.drawable.security, "Libro que necesita Dragomir", 0))
-            libro.add(Book("IT", R.drawable.it, "Libro que necesita Dragomir", 0))
-            libro.add(Book("Harry Potter", R.drawable.hp, "Libro que necesita Dragomir", 0))
-        }
+    }
 
-        var lista = vista.findViewById(R.id.lista) as ListView
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        adaptador = CustomAdapter(this.context!!,libro)
-        lista.adapter = adaptador
-
-
-        //Celda de cada Libro
-        lista.setOnItemClickListener { _, _, position, _ ->
-            listener.onButton(libro[position])
-        }
-
-        return vista
+        getGoogleBooks().execute()
     }
 
 
@@ -67,7 +64,7 @@ class ListBooksFragment : Fragment(){
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return (when(item.itemId) {
+        return (when (item.itemId) {
             R.id.log_out -> {
                 listener.goLogin()
                 true
@@ -75,6 +72,96 @@ class ListBooksFragment : Fragment(){
             else ->
                 super.onOptionsItemSelected(item)
         })
+    }
+
+    internal inner class getGoogleBooks : AsyncTask<String, String, String>() {
+        override fun doInBackground(vararg params: String?): String {
+
+            var response = ""
+
+
+            val url = URL("https://www.googleapis.com/books/v1/volumes?q=harry_potter&maxResults=10&printType=books")
+            val connection = url.openConnection() as HttpURLConnection
+            connection.connect()
+            val rd = BufferedReader(InputStreamReader(connection.inputStream) as Reader?)
+
+
+            var s = rd.readLine()
+            while (s != null) {
+                response += s
+                s = rd.readLine()
+            }
+
+
+            parseJSONVolumes(response)
+
+            // Return the raw response.
+            return response
+        }
+
+        override fun onPostExecute(result: String?) {
+            super.onPostExecute(result)
+
+            try {
+
+                showBookList()
+
+            } catch (e: IllegalStateException){
+                e.message
+            }
+        }
+
+
+    }
+
+
+
+    private fun parseJSONVolumes(result: String) {
+
+        val jsonObject = JSONObject(result)
+        val itemsArray = jsonObject.getJSONArray("items")
+        var i = 0
+
+        while (i < itemsArray.length()) {
+
+            try {
+
+                // Get the current item information.
+                val book = itemsArray.getJSONObject(i)
+
+                val volumeInfo = book.getJSONObject("volumeInfo")
+                val title = volumeInfo.getString("title")
+
+                var description: String = "No Description"
+                if (volumeInfo.has("description")) {
+                    description = volumeInfo.getString("description")
+                }
+
+
+
+                val imageLinks = JSONObject(volumeInfo.optString("imageLinks"))
+                val image = imageLinks.getString("thumbnail")
+
+                libro.add(Book(title, image, description, 0))
+
+                i ++
+
+            } catch (e: RuntimeException) {
+                e.stackTrace
+            } catch (e: JSONException) {
+                e.stackTrace
+            }
+
+        }
+    }
+
+    private fun showBookList(){
+
+
+        val adapter = CustomAdapter(context!!, libro)
+        lista.adapter = adapter
+
+
     }
 
 }

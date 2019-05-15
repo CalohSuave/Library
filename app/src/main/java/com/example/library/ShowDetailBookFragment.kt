@@ -37,16 +37,16 @@ class ShowDetailBookFragment : androidx.fragment.app.Fragment() {
 
         val libro = arguments!!.getParcelable("book") ?: Book.getEmptyLibro()
 
-        updateText(libro)
+        //updateText(libro)
 
     }
-
+/*
     fun updateText(libro: Book) {
         iv_portrait_detail.setImageResource(libro.cover)
         tv_nameBook.text = libro.title
         tv_description.text=libro.description
 
-    }
+    }*/
 
 
     }

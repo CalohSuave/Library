@@ -2,15 +2,15 @@ package com.example.library
 import android.os.Parcel
 import android.os.Parcelable
 
-class Book(title:String, cover:Int, description:String, favourite:Int):Parcelable {
+class Book(title:String, cover:String, description:String, favourite:Int):Parcelable {
     var title:String = ""
-    var cover:Int = 0
+    var cover:String = ""
     var description:String = ""
     var favourite:Int = 0
 
     constructor(parcel: Parcel) : this(
         title = parcel.readString(),
-        cover = parcel.readInt(),
+        cover = parcel.readString(),
         description = parcel.readString(),
         favourite = parcel.readInt() //Esta variable deberia de ser Boolean pero no sabemos como parcearla
     )
@@ -24,7 +24,7 @@ class Book(title:String, cover:Int, description:String, favourite:Int):Parcelabl
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(title)
-        parcel.writeInt(cover)
+        parcel.writeString(cover)
         parcel.writeString(description)
         parcel.writeInt(favourite)
     }
@@ -35,7 +35,7 @@ class Book(title:String, cover:Int, description:String, favourite:Int):Parcelabl
 
     companion object CREATOR : Parcelable.Creator<Book> {
         fun getEmptyLibro(): Book {
-            return Book(title = " ",cover = 0 ,description = " ",favourite = 0)
+            return Book(title = " ",cover = " " ,description = " ",favourite = 0)
         }
         override fun createFromParcel(parcel: Parcel): Book {
             return Book(parcel)

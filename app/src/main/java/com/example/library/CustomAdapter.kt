@@ -8,6 +8,7 @@ import android.widget.BaseAdapter
 
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.detail_item.view.*
 
 class CustomAdapter(private val context: Context, private val items:ArrayList<Book>): BaseAdapter(){
@@ -36,7 +37,10 @@ class CustomAdapter(private val context: Context, private val items:ArrayList<Bo
         val item = getItem(position)
 
         holder.titulo.text= item.title
-        holder.cover.setImageResource(item.cover)
+        Glide.with(context)
+            .load(item.cover)
+            .into(holder.cover!!)
+
 
 
         /*holder.favourite.setOnClickListener {
