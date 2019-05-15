@@ -27,8 +27,8 @@ class MainActivity : AppCompatActivity(), OnListBookCellPressed, OnLoginFragment
     }
 
 
-    override fun isUserOnDataBase() {
-
+    override fun isUserOnDataBase(currentUserId: Int) {
+        CurrentUser.id = currentUserId
         val listBooks = ListBooksFragment()
         supportFragmentManager.beginTransaction().replace(R.id.maincontainer, listBooks).addToBackStack(null).commit()
 
