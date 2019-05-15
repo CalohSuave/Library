@@ -1,7 +1,7 @@
 package com.example.library
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
 import androidx.appcompat.widget.Toolbar
 import com.example.library.ListBooksFragment.OnListBookCellPressed
 import com.example.library.LoginFragment.OnLoginFragmentPressed
@@ -10,8 +10,14 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity(), OnListBookCellPressed, OnLoginFragmentPressed, OnRegisterFragment{
+
     override fun goLogin() {
-        onBackPressed()
+        finish()
+        val gotoLogin = Intent(this, MainActivity::class.java)
+        startActivity(gotoLogin)
+
+
+
     }
 
 

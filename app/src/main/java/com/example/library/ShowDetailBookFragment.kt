@@ -3,8 +3,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.fragment_show_detail_book.*
-
 
 class ShowDetailBookFragment : androidx.fragment.app.Fragment() {
 
@@ -31,15 +29,16 @@ class ShowDetailBookFragment : androidx.fragment.app.Fragment() {
         return inflater.inflate(R.layout.fragment_show_detail_book, container, false)
     }
 
-
+/*
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val libro = arguments!!.getParcelable("book") ?: Book.getEmptyLibro()
+        //val libro = arguments!!.getParcelable("book") ?: Book.getEmptyLibro()
 
         //updateText(libro)
 
     }
+    */
 /*
     fun updateText(libro: Book) {
         iv_portrait_detail.setImageResource(libro.cover)

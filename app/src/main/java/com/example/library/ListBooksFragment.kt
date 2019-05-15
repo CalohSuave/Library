@@ -3,8 +3,6 @@ import android.content.Context
 import android.os.AsyncTask
 import android.os.Bundle
 import android.view.*
-import android.widget.AdapterView
-import android.widget.ListView
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_list_books.*
 
@@ -41,7 +39,7 @@ class ListBooksFragment : Fragment() {
         setHasOptionsMenu(true)
 
 
-       return inflater.inflate(R.layout.fragment_list_books, container, false)
+        return inflater.inflate(R.layout.fragment_list_books, container, false)
 
     }
 
@@ -80,7 +78,7 @@ class ListBooksFragment : Fragment() {
             var response = ""
 
 
-            val url = URL("https://www.googleapis.com/books/v1/volumes?q=harry_potter&maxResults=10&printType=books")
+            val url = URL("https://www.googleapis.com/books/v1/volumes?q=a&maxResults=10&printType=books")
             val connection = url.openConnection() as HttpURLConnection
             connection.connect()
             val rd = BufferedReader(InputStreamReader(connection.inputStream) as Reader?)
@@ -143,7 +141,6 @@ class ListBooksFragment : Fragment() {
                 val image = imageLinks.getString("thumbnail")
 
                 libro.add(Book(title, image, description, 0))
-
                 i ++
 
             } catch (e: RuntimeException) {
@@ -157,7 +154,6 @@ class ListBooksFragment : Fragment() {
 
     private fun showBookList(){
 
-
         val adapter = CustomAdapter(context!!, libro)
         lista.adapter = adapter
 
@@ -165,4 +161,3 @@ class ListBooksFragment : Fragment() {
     }
 
 }
-
