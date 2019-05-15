@@ -13,7 +13,13 @@ import kotlinx.android.synthetic.main.detail_item.view.*
 
 class CustomAdapter(private val context: Context, private val items:ArrayList<Book>): BaseAdapter(){
 
-
+    /**
+     * Getter of the View
+     * @param position the position
+     * @param convertView the view
+     * @param parent the view group
+     * @return View vista
+     * */
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
 
@@ -51,14 +57,29 @@ class CustomAdapter(private val context: Context, private val items:ArrayList<Bo
 
     }
 
+    /**
+     * Item getter
+     * @param position the position of the item to return
+     * @return Book item in a specified position
+     * */
     override fun getItem(position: Int): Book {
         return items[position]
     }
 
+    /**
+     * Item ID getter
+     * @param position the position of the item's id you want to get
+     * @return Long item's id
+     * */
     override fun getItemId(position: Int): Long {
         return position.toLong()
     }
 
+
+    /**
+     * Gets the amount of items in the list
+     * @return Int number of items
+     * */
     override fun getCount(): Int {
         return items.count()
     }
