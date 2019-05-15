@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+
 import com.example.library.RoomDataBase.User
 import com.example.library.RoomDataBase.UserTask
 import kotlinx.android.synthetic.main.fragment_register.*
@@ -18,8 +19,10 @@ private const val ARG_PASSWORD = "password"
 
 class RegisterFragment : Fragment() {
 
-
+    /** User's email */
     private lateinit var email: String
+
+    /** User's password */
     private lateinit var password: String
 
     var emailCorrecto: Boolean = false
@@ -29,6 +32,10 @@ class RegisterFragment : Fragment() {
 
     private lateinit var listener: OnRegisterFragment
 
+
+    /**
+     * If there are values in the variables it save them otherwise it sets them to ""
+     * */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -38,6 +45,8 @@ class RegisterFragment : Fragment() {
 
     }
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,6 +55,11 @@ class RegisterFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_register, container, false)
     }
 
+    /**
+     * When the activity is created it gets the values of {@link #email} and {@link #password}
+     * it also sets the button and finally it checks the text entered in the three
+     * different inputs
+     * */
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -163,17 +177,32 @@ class RegisterFragment : Fragment() {
     }
 
 
+    /**
+     * Checks if it has only letters
+     * @param nombre
+     * @return Boolean true if it has only letters and false if it hasn't
+     * */
     fun isAlpha(nombre: EditText): Boolean {
         val name = nombre.text.toString()
         return name.matches("[a-zA-Z ]+".toRegex())
     }
 
 
+    /**
+     * Checks is the email is valid
+     * @param nombre email string
+     * @return Boolean true if is valid and false if it's not
+     * */
     fun isEmailValid(nombre: EditText): Boolean {
         val name = nombre.text.toString()
         return name.matches("^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}\$".toRegex())
     }
 
+    /**
+     * Checks if the Password is valid
+     * @param nombre password string
+     * @return Boolean true if is valid and false if it's not
+     * */
     fun isPasswordValid(nombre: EditText): Boolean {
         val name = nombre.text.toString()
         return name.matches("^(?=.*?[a-zA-Z])(?=.*?[0-9]).{8,}\$".toRegex())
@@ -181,6 +210,12 @@ class RegisterFragment : Fragment() {
 
     }
 
+    /**
+     * Creates a new account
+     * @param username
+     * @param email
+     * @param password
+     * */
     private fun createNewAccount(username: String, email: String , password: String) {
         val id: String = UUID.randomUUID().toString()
         var user = User(
@@ -193,6 +228,10 @@ class RegisterFragment : Fragment() {
         listener.onRegisterButtonPressed("",email,password)
     }
 
+    /**
+     * Redirects the user to the login, with his email and password
+     * @param user The User object with all the user information
+     * */
     fun redirectLogin(user: User) {
         // Redirigir al register to login
         listener.onRegisterButtonPressed(user.userName, user.email, user.password)
