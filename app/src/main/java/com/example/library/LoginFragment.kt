@@ -1,6 +1,8 @@
 package com.example.library
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.os.AsyncTask
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +11,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.library.RoomDataBase.UsersDatabase
 import kotlinx.android.synthetic.main.fragment_login.*
+
+
+
 
 
 private const val ARG_EMAIL = "email"
@@ -35,36 +40,24 @@ class LoginFragment : Fragment() {
         et_email_loginfragment.setText(email)
         et_password_loginfragment.setText(password)
 
-        val userDao = UsersDatabase.getInstance(activity!!.applicationContext).userDao()
-
-        bt_login_loginfragment.setOnClickListener {
-<<<<<<< HEAD
-            if (userDao.isExistUser(email, password)){
-                listener.isUserOnDataBase()
-            } else {
-                Toast.makeText(activity, "anwnedoa", Toast.LENGTH_SHORT).show()
-            }
-=======
->>>>>>> 11b93ff716cd6af39a3c51d79d43c9a9a6ca9f08
-
-
-            listener.isUserOnDataBase()
-            // THREAD EN BACKGROUND PARA COMPROBAR SI EL USUARIO EXISTE
-        /*    for (i in 1..4) {
-                Thread {
-                    if (userDao.isExistUser(et_email_loginfragment.text.toString(),et_password_loginfragment.text.toString()) > 0){
-                        listener.isUserOnDataBase()
-                        return@Thread
-                    } else {
-                        Toast.makeText(activity, "asdfasdf", Toast.LENGTH_SHORT).show()
-                    }
-                }.run()
-            }*/
-        }
 
         bt_register_loginfragment.setOnClickListener {
             listener.goToRegisterFragment(et_email_loginfragment.text.toString(),et_password_loginfragment.text.toString())
         }
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+
+        bt_login_loginfragment.setOnClickListener {
+
+            getUserDB().execute()
+        }
+
+
 
     }
 
@@ -111,5 +104,36 @@ class LoginFragment : Fragment() {
                 }
             }
     }
+
+    //LOOOOOK DAT SANTI
+
+    @SuppressLint("StaticFieldLeak")
+    internal inner class getUserDB : AsyncTask<Void, Void, Int>() {
+        override fun doInBackground(vararg params: Void): Int? {
+
+            val email :String = et_email_loginfragment.text.toString()
+            val password:String = et_password_loginfragment.text.toString()
+            val agentDao = UsersDatabase.getInstance(context!!).userDao()
+
+            return agentDao.isExistUser(email,password)
+        }
+
+        override fun onPostExecute(isExistUser: Int){
+            super.onPostExecute(isExistUser)
+
+            if (isExistUser > 0) {
+
+                listener.isUserOnDataBase()
+            } else {
+                Toast.makeText(activity, "No existe usuario", Toast.LENGTH_LONG).show()
+            }
+
+        }
+
+
+
+    }
+
+
 
 }
