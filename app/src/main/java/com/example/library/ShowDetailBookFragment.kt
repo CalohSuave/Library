@@ -14,6 +14,8 @@ import kotlinx.android.synthetic.main.fragment_register.*
 import kotlinx.android.synthetic.main.fragment_show_detail_book.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.fragment_show_detail_book.*
 
 class ShowDetailBookFragment : androidx.fragment.app.Fragment() {
 
@@ -37,9 +39,7 @@ class ShowDetailBookFragment : androidx.fragment.app.Fragment() {
 
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_show_detail_book, container, false)
     }
@@ -48,8 +48,9 @@ class ShowDetailBookFragment : androidx.fragment.app.Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        //val libro = arguments!!.getParcelable("book") ?: Book.getEmptyLibro()
-        //updateText(libro)
+        val libro = arguments!!.getParcelable("book") ?: Book.getEmptyLibro()
+
+        updateText(libro)
 
         val userBookDao = UsersDatabase.getInstance(context!!).userBookDao()
         val userBook: UserBook = UserBook(tv_nameBook.text.toString(), CurrentUser.id)
@@ -65,7 +66,6 @@ class ShowDetailBookFragment : androidx.fragment.app.Fragment() {
             }
         }
     }
-
     @SuppressLint("StaticFieldLeak")
     internal inner class getBookbyId : AsyncTask<Void, Void, Int>() {
         override fun doInBackground(vararg params: Void): Int? {
@@ -79,8 +79,10 @@ class ShowDetailBookFragment : androidx.fragment.app.Fragment() {
             super.onPostExecute(isExistBookById)
 
             if (isExistBookById > 0) {
-                bt_star.isActivated = true
-                buttonActive = true
+                if (bt_star.isActivated) {
+                    buttonActive = true
+                }
+
             }
 
         }
@@ -89,21 +91,11 @@ class ShowDetailBookFragment : androidx.fragment.app.Fragment() {
 
     }
 
-    /*internal inner class insertFavorite() : AsyncTask<UserBook, Void, Void>() {
-
-        override fun doInBackground(vararg params: UserBook?): Void {
-            userBookDao.insertFavoriteBook(params[0]!!)
-            return Void.TYPE.newInstance()
-        }
-    }
-
-
     fun updateText(libro: Book) {
-        iv_portrait_detail.setImageResource(libro.cover)
+        Glide.with(context!!).load(libro.cover).into(iv_portrait_detail)
         tv_nameBook.text = libro.title
-        tv_description.text=libro.description
-
-    }*/
+        tv_description.text = libro.description
+    }
 
 
     }

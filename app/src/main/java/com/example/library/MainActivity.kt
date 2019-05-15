@@ -15,9 +15,6 @@ class MainActivity : AppCompatActivity(), OnListBookCellPressed, OnLoginFragment
         finish()
         val gotoLogin = Intent(this, MainActivity::class.java)
         startActivity(gotoLogin)
-
-
-
     }
 
 

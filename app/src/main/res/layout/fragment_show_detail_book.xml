@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
 
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ShowDetailBookFragment"
-        android:background="@android:color/holo_orange_light">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/common_google_signin_btn_text_dark_focused"
+    tools:context=".ShowDetailBookFragment">
 
     <TextView
         android:id="@+id/tv_nameBook"
@@ -28,20 +29,23 @@
 
 
     <CheckBox
-            android:id="@+id/bt_star"
-            android:layout_width="65dp"
-            android:layout_height="63dp"
-            android:clickable="true"
-            android:button="@null"
-            android:stateListAnimator="@animator/scale"
-            android:checked="false"
-            android:background="@drawable/like_icon"
-            android:focusable="true"
-            android:layout_marginEnd="56dp" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tv_nameBook"
-            android:layout_marginStart="8dp" app:layout_constraintHorizontal_bias="0.0"
-            android:layout_marginTop="276dp"
-            app:layout_constraintTop_toTopOf="parent" tools:targetApi="lollipop" />
+        android:id="@+id/bt_star"
+        android:layout_width="65dp"
+        android:layout_height="63dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="276dp"
+        android:layout_marginEnd="56dp"
+        android:background="@drawable/like_icon"
+        android:button="@null"
+        android:checked="false"
+        android:clickable="true"
+        android:focusable="true"
+        android:stateListAnimator="@animator/scale"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/tv_nameBook"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:targetApi="lollipop" />
 
     <ImageView
         android:id="@+id/iv_portrait_detail"

@@ -3,9 +3,9 @@ import android.content.Context
 import android.os.AsyncTask
 import android.os.Bundle
 import android.view.*
+import android.widget.AdapterView
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_list_books.*
-
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.BufferedReader
@@ -19,34 +19,34 @@ class ListBooksFragment : Fragment() {
 
     var libro: ArrayList<Book> = ArrayList()
     private lateinit var listener: OnListBookCellPressed
-    lateinit var adaptador: CustomAdapter
 
 
+    //BOTONES FRAGMENTS
     interface OnListBookCellPressed {
         fun onButton(books: Book)
-
         fun goLogin()
     }
 
+    //PARA ACTIVAR EL TOOLBAR
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
 
 
-
+    //PARA ACTIVAR EL TOOLBAR
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
-
-
         return inflater.inflate(R.layout.fragment_list_books, container, false)
 
     }
 
+
+    //EJECUTAMOS LA FUNCION EN SEGUNDO PLANO
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        getGoogleBooks().execute()
+        queryBooks().execute()
     }
 
 
@@ -56,11 +56,13 @@ class ListBooksFragment : Fragment() {
     }
 
 
+    //DECLARAR LAS OPCIONES DEL TOOBAL
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
+    //AQUI DECLARAMOS LAS DIFERENTES ACCIONES QUE LLEVAN ACABO CADA ICONO
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return (when (item.itemId) {
             R.id.log_out -> {
@@ -72,13 +74,13 @@ class ListBooksFragment : Fragment() {
         })
     }
 
-    internal inner class getGoogleBooks : AsyncTask<String, String, String>() {
+
+    //TASK PARA HACER LA LLAMADA A LA API
+    internal inner class queryBooks : AsyncTask<String, String, String>() {
         override fun doInBackground(vararg params: String?): String {
 
-            var response = ""
-
-
-            val url = URL("https://www.googleapis.com/books/v1/volumes?q=a&maxResults=10&printType=books")
+            var asnwerApi: String = ""
+            val url = URL("https://www.googleapis.com/books/v1/volumes?q=Harry&maxResults=10&printType=books")
             val connection = url.openConnection() as HttpURLConnection
             connection.connect()
             val rd = BufferedReader(InputStreamReader(connection.inputStream) as Reader?)
@@ -86,23 +88,20 @@ class ListBooksFragment : Fragment() {
 
             var s = rd.readLine()
             while (s != null) {
-                response += s
+                asnwerApi += s
                 s = rd.readLine()
             }
-
-
-            parseJSONVolumes(response)
+            parseBooks(asnwerApi)
 
             // Return the raw response.
-            return response
+            return asnwerApi
         }
 
         override fun onPostExecute(result: String?) {
             super.onPostExecute(result)
 
             try {
-
-                showBookList()
+                showList()
 
             } catch (e: IllegalStateException){
                 e.message
@@ -112,30 +111,25 @@ class ListBooksFragment : Fragment() {
 
     }
 
+    private fun parseBooks(documentToParse: String) {
 
-
-    private fun parseJSONVolumes(result: String) {
-
-        val jsonObject = JSONObject(result)
+        val jsonObject = JSONObject(documentToParse)
         val itemsArray = jsonObject.getJSONArray("items")
         var i = 0
 
         while (i < itemsArray.length()) {
 
             try {
-
-                // Get the current item information.
                 val book = itemsArray.getJSONObject(i)
-
                 val volumeInfo = book.getJSONObject("volumeInfo")
                 val title = volumeInfo.getString("title")
 
+
                 var description: String = "No Description"
+
                 if (volumeInfo.has("description")) {
                     description = volumeInfo.getString("description")
                 }
-
-
 
                 val imageLinks = JSONObject(volumeInfo.optString("imageLinks"))
                 val image = imageLinks.getString("thumbnail")
@@ -152,11 +146,15 @@ class ListBooksFragment : Fragment() {
         }
     }
 
-    private fun showBookList(){
+    private fun showList(){
 
         val adapter = CustomAdapter(context!!, libro)
         lista.adapter = adapter
 
+
+        lista.setOnItemClickListener { _: AdapterView<*>, _: View, position: Int, _: Long ->
+            listener.onButton(libro[position])
+        }
 
     }
 
