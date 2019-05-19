@@ -18,9 +18,9 @@ class ShowDetailBookFragment : androidx.fragment.app.Fragment() {
             showDetailBook.arguments = args
 
             return showDetailBook
-            }
-
         }
+
+    }
 
 
     override fun onCreateView(
@@ -52,6 +52,6 @@ class ShowDetailBookFragment : androidx.fragment.app.Fragment() {
     }
 
 
-    }
+}
 
 
