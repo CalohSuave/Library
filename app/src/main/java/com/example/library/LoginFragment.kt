@@ -21,6 +21,7 @@ class LoginFragment : Fragment() {
     private lateinit var listener: OnLoginFragmentPressed
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -67,7 +68,7 @@ class LoginFragment : Fragment() {
         if (context is OnLoginFragmentPressed) {
             listener = context
         } else {
-            throw RuntimeException(context.toString() + " must implement OnRegisterFragment")
+            throw RuntimeException(context.toString() + " must implement OnRegisterFragment") as Throwable
         }
     }
 
@@ -80,7 +81,7 @@ class LoginFragment : Fragment() {
     interface OnLoginFragmentPressed {
 
         //Click en el boton de login que hacer una query para saber si el usuario existe o no
-        fun isUserOnDataBase()
+        fun isUserOnDataBase(currentUserId: Int)
 
         //Click en el boton de registro y enviamos el email y password
         fun goToRegisterFragment(email: String, password: String)
@@ -107,15 +108,21 @@ class LoginFragment : Fragment() {
             val password:String = et_password_loginfragment.text.toString()
             val agentDao = UsersDatabase.getInstance(context!!).userDao()
 
-            return agentDao.isExistUser(email,password)
+
+            if (agentDao.isExistUser(email,password) == 0) {
+                return -1
+            } else {
+                val agentDao2 = UsersDatabase.getInstance(context!!).userDao()
+                return agentDao2.getUserByEmailAndPassword(et_email_loginfragment.text.toString(), et_password_loginfragment.text.toString())
+            }
+
         }
 
-        override fun onPostExecute(isExistUser: Int){
-            super.onPostExecute(isExistUser)
+        override fun onPostExecute(currentUserId: Int){
+            super.onPostExecute(currentUserId)
 
-            if (isExistUser > 0) {
-
-                listener.isUserOnDataBase()
+            if (currentUserId != -1) {
+                listener.isUserOnDataBase(currentUserId)
             } else {
                 Toast.makeText(activity, "No existe usuario", Toast.LENGTH_LONG).show()
             }

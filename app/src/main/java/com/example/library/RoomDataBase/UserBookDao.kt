@@ -15,6 +15,9 @@ interface UserBookDao {
     @Query("SELECT * FROM userbook WHERE bookid = :bookid AND userid = :userid")
     fun getFavoriteBookByBookIdAndUserId(bookid: String, userid: String): UserBook
 
+    @Query("SELECT * FROM userbook WHERE bookid = :bookid AND userid = :userid")
+    fun isExistsFavoriteBookById(bookid: String, userid: Int): Int
+
     /**
      * Insert a favorite book in the database. If the user already exists, replace it.
      * @param user the user to be inserted.
@@ -26,5 +29,5 @@ interface UserBookDao {
      * Remove book of favorite.
      */
     @Query("DELETE FROM userbook WHERE bookid = :bookid AND userid = :userid")
-    fun removeFavorite(bookid: String, userid: String)
+    fun removeFavorite(bookid: String, userid: Int)
 }

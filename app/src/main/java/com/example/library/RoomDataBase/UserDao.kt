@@ -12,8 +12,8 @@ interface UserDao {
      * Get a user by username and password.
      * @return the user from the table with a specific id.
      */
-    @Query("SELECT * FROM user WHERE email = :email AND password = :pswd")
-    fun getUserByEmailAndPassword(email: String, pswd: String): User
+    @Query("SELECT userid FROM user WHERE email = :email AND password = :pswd")
+    fun getUserByEmailAndPassword(email: String, pswd: String): Int
 
     @Query("SELECT COUNT(*) FROM user WHERE email = :email AND password = :pswd")
     fun isExistUser(email: String, pswd: String): Int
