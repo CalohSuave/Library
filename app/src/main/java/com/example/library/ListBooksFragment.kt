@@ -17,17 +17,24 @@ import java.net.URL
 
 class ListBooksFragment : Fragment() {
 
+    /** List with all the books*/
     var libro: ArrayList<Book> = ArrayList()
+
+    /** Listener of the BookCell*/
     private lateinit var listener: OnListBookCellPressed
 
 
     //BOTONES FRAGMENTS
+    /** Fragment buttons*/
     interface OnListBookCellPressed {
         fun onButton(books: Book)
         fun goLogin()
     }
 
     //PARA ACTIVAR EL TOOLBAR
+    /** Activates the toolbar
+     * @param savedInstanceState
+     * */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -35,6 +42,12 @@ class ListBooksFragment : Fragment() {
 
 
     //PARA ACTIVAR EL TOOLBAR
+    /** While the view is being create it activates the toolbar
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return View the view inflated
+     * */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_list_books, container, false)
@@ -43,6 +56,10 @@ class ListBooksFragment : Fragment() {
 
 
     //EJECUTAMOS LA FUNCION EN SEGUNDO PLANO
+    /** When the is created it executes the query of the books
+     * @param view
+     * @param savedInstanceState bundle
+     * */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -57,12 +74,21 @@ class ListBooksFragment : Fragment() {
 
 
     //DECLARAR LAS OPCIONES DEL TOOBAL
+    /**
+     * Declares the options of the toolbar
+     * @param menu the menu
+     * @param inflater the menu inflater
+     * */
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
     //AQUI DECLARAMOS LAS DIFERENTES ACCIONES QUE LLEVAN ACABO CADA ICONO
+    /** Defines each button action
+     * @param item the menu item
+     * @return Boolean when action done
+     * */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return (when (item.itemId) {
             R.id.log_out -> {
@@ -76,7 +102,13 @@ class ListBooksFragment : Fragment() {
 
 
     //TASK PARA HACER LA LLAMADA A LA API
+    /** All the tasks to call the API */
     internal inner class queryBooks : AsyncTask<String, String, String>() {
+        /**
+         * Calls the API on the background
+         * @param params
+         * @return asnwerApi String of the answer of the API
+         * */
         override fun doInBackground(vararg params: String?): String {
 
             var asnwerApi: String = ""
@@ -97,6 +129,10 @@ class ListBooksFragment : Fragment() {
             return asnwerApi
         }
 
+        /** After executing the statement it prints the list
+         * @param result the result obtained
+         * @catch IllegalStateException
+         * */
         override fun onPostExecute(result: String?) {
             super.onPostExecute(result)
 
@@ -111,8 +147,13 @@ class ListBooksFragment : Fragment() {
 
     }
 
+    /**
+     * Parses all the books and gets all the information of each book
+     * @param documentToParse the JSon document where all the books are
+     * @catch RuntimeException
+     * @catch JSONException
+     * */
     private fun parseBooks(documentToParse: String) {
-
         val jsonObject = JSONObject(documentToParse)
         val itemsArray = jsonObject.getJSONArray("items")
         var i = 0
@@ -146,11 +187,10 @@ class ListBooksFragment : Fragment() {
         }
     }
 
+    /** Shows the list of books*/
     private fun showList(){
-
         val adapter = CustomAdapter(context!!, libro)
         lista.adapter = adapter
-
 
         lista.setOnItemClickListener { _: AdapterView<*>, _: View, position: Int, _: Long ->
             listener.onButton(libro[position])

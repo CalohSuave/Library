@@ -25,16 +25,22 @@ class RegisterFragment : Fragment() {
     /** User's password */
     private lateinit var password: String
 
+    /** Is the email correct */
     var emailCorrecto: Boolean = false
+
+    /** Is the password correct */
     var contrasCorrect: Boolean = false
+
+    /** Is the username correct */
     var usernameCorrect: Boolean = false
 
-
+    /** Register Fragment Listener */
     private lateinit var listener: OnRegisterFragment
 
 
     /**
      * If there are values in the variables it save them otherwise it sets them to ""
+     * @param savedInstanceState
      * */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +52,11 @@ class RegisterFragment : Fragment() {
     }
 
 
-
+    /** When the view is created it inflates it
+     * @param inflater the layout inflater
+     * @param container the view group
+     * @param savedInstanceState
+     * @return View the inflated view*/
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -59,6 +69,7 @@ class RegisterFragment : Fragment() {
      * When the activity is created it gets the values of {@link #email} and {@link #password}
      * it also sets the button and finally it checks the text entered in the three
      * different inputs
+     * @param savedInstanceState
      * */
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -83,6 +94,10 @@ class RegisterFragment : Fragment() {
 
 
         et_username_registerfragment.addTextChangedListener(object : TextChangedListener<EditText>(et_username_registerfragment) {
+
+            /** When the text is changed it checks the format is correct with its regex {@link #isAlpha()}
+             * @param target the edit text where is checking
+             * @param s the editable*/
             override fun onTextChanged(target: EditText, s: Editable) {
                 val res = resources
                 val nombresErr = res.getStringArray(R.array.NameErrors)
@@ -102,6 +117,11 @@ class RegisterFragment : Fragment() {
         })
 
         et_email_registerfragment.addTextChangedListener(object : TextChangedListener<EditText>(et_email_registerfragment) {
+
+            /** When the text its changed it checks the {@link #email} format is correct using
+             * {@link #isEmailValid()}
+             * @param target the edit text where is checking
+             * @param s the editable*/
             override fun onTextChanged(target: EditText, s: Editable) {
                 val res = resources
                 val nombresErr = res.getStringArray(R.array.EmailErrors)
@@ -124,6 +144,11 @@ class RegisterFragment : Fragment() {
 
 
         et_password_registerfragment.addTextChangedListener(object : TextChangedListener<EditText>(et_password_registerfragment) {
+
+            /** When the text its changed it checks the {@link #password} format is correct using
+             * {@link #isPasswordValid()}
+             * @param target the edit text where is checking
+             * @param s the editable*/
             override fun onTextChanged(target: EditText, s: Editable) {
                 val res = resources
                 val nombresErr = res.getStringArray(R.array.PasswordError)
@@ -145,6 +170,7 @@ class RegisterFragment : Fragment() {
 
     }
 
+    /** @throws RuntimeException*/
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is OnRegisterFragment) {
@@ -160,13 +186,22 @@ class RegisterFragment : Fragment() {
     }
 
     interface OnRegisterFragment {
+
+        /** Action it does when the button is pressed
+         * @param name user name
+         * @param email user email
+         * @param Password user password*/
         fun onRegisterButtonPressed(name: String, email: String,Password: String)
 
+        /** Goes back */
         fun goBack()
     }
 
     companion object {
         @JvmStatic
+        /** It creates a new Instance of the Register Fragment and it puts the email and password
+         * @param email user email
+         * @param password user password*/
         fun newInstance(email: String, password: String) =
             RegisterFragment().apply {
                 arguments = Bundle().apply {
@@ -179,7 +214,7 @@ class RegisterFragment : Fragment() {
 
     /**
      * Checks if it has only letters
-     * @param nombre
+     * @param nombre username
      * @return Boolean true if it has only letters and false if it hasn't
      * */
     fun isAlpha(nombre: EditText): Boolean {
@@ -212,9 +247,9 @@ class RegisterFragment : Fragment() {
 
     /**
      * Creates a new account
-     * @param username
-     * @param email
-     * @param password
+     * @param username user username
+     * @param email user email
+     * @param password user password
      * */
     private fun createNewAccount(username: String, email: String , password: String) {
         val id: String = UUID.randomUUID().toString()
