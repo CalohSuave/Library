@@ -9,4 +9,4 @@ data class UserBook(
                 @ColumnInfo(name = "bookid")
                 val bookid: String,
                 @ColumnInfo(name = "userid")
-                val userid: String)
+                val userid: Int)
