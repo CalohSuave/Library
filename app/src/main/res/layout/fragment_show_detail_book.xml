@@ -24,33 +24,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.365"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_portrait_detail"
+        app:layout_constraintTop_toBottomOf="@+id/iv_portrait_logo_show_info_book"
         tools:targetApi="o" />
 
 
-    <CheckBox
-        android:id="@+id/bt_star"
-        android:layout_width="65dp"
-        android:layout_height="63dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="276dp"
-        android:layout_marginEnd="56dp"
-        android:background="@drawable/like_icon"
-        android:button="@null"
-        android:checked="false"
-        android:clickable="true"
-        android:focusable="true"
-        android:stateListAnimator="@animator/scale"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/tv_nameBook"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:targetApi="lollipop" />
-
     <ImageView
-        android:id="@+id/iv_portrait_detail"
-        android:layout_width="194dp"
-        android:layout_height="218dp"
+        android:id="@+id/iv_portrait_logo_show_info_book"
+        android:layout_width="157dp"
+        android:layout_height="165dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="8dp"
@@ -74,6 +55,20 @@
         android:textAlignment="viewStart"
         android:textColor="@android:color/white"
         android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_nameBook" />
+
+    <Button
+        android:id="@+id/bt_add_tofav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
+        android:text="@string/add_to_fav"
+        app:layout_constraintBottom_toTopOf="@+id/tv_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_nameBook" />

@@ -1,21 +1,12 @@
 package com.example.library
-import android.annotation.SuppressLint
-import android.content.ClipData
 import android.os.AsyncTask
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import com.example.library.RoomDataBase.UserBook
-import com.example.library.RoomDataBase.UsersDatabase
-import kotlinx.android.synthetic.main.fragment_login.*
-import kotlinx.android.synthetic.main.fragment_register.*
 import kotlinx.android.synthetic.main.fragment_show_detail_book.*
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.fragment_show_detail_book.*
+
 
 class ShowDetailBookFragment : androidx.fragment.app.Fragment() {
 
@@ -29,9 +20,7 @@ class ShowDetailBookFragment : androidx.fragment.app.Fragment() {
             val showDetailBook = ShowDetailBookFragment()
             val args = Bundle()
             args.putParcelable("book", book)
-
             showDetailBook.arguments = args
-
             return showDetailBook
         }
 
@@ -52,6 +41,15 @@ class ShowDetailBookFragment : androidx.fragment.app.Fragment() {
 
         updateText(libro)
 
+
+        bt_add_tofav.setOnClickListener {
+
+           // val userBookDao = UsersDatabase.getInstance(context!!).userBookDao()
+           // val userBook: UserBook = UserBook(libro.title, CurrentUser.id)
+
+        }
+
+        /*
         val userBookDao = UsersDatabase.getInstance(context!!).userBookDao()
         val userBook: UserBook = UserBook(tv_nameBook.text.toString(), CurrentUser.id)
         getBookbyId().execute()
@@ -64,8 +62,10 @@ class ShowDetailBookFragment : androidx.fragment.app.Fragment() {
                 }
 
             }
-        }
+        }*/
     }
+
+    /*
     @SuppressLint("StaticFieldLeak")
     internal inner class getBookbyId : AsyncTask<Void, Void, Int>() {
         override fun doInBackground(vararg params: Void): Int? {
@@ -79,7 +79,7 @@ class ShowDetailBookFragment : androidx.fragment.app.Fragment() {
             super.onPostExecute(isExistBookById)
 
             if (isExistBookById > 0) {
-                if (bt_star.isActivated) {
+                if (bt_star.callOnClick()) {
                     buttonActive = true
                 }
 
@@ -88,13 +88,31 @@ class ShowDetailBookFragment : androidx.fragment.app.Fragment() {
         }
 
 
+    }*/
+
+    fun updateText(libro: Book) {
+        Glide.with(context!!).load(libro.cover).into(iv_portrait_logo_show_info_book)
+        tv_nameBook.text = libro.title
+        tv_description.text = libro.description
+    }
+
+    fun saveBook(libro: Book){
+
+        var title = libro.title
+        var logo = libro.cover
 
     }
 
-    fun updateText(libro: Book) {
-        Glide.with(context!!).load(libro.cover).into(iv_portrait_detail)
-        tv_nameBook.text = libro.title
-        tv_description.text = libro.description
+
+    internal class saveBook: AsyncTask<Void,Void,String>(){
+        override fun doInBackground(vararg params: Void?): String {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+        override fun onPostExecute(result: String?) {
+            super.onPostExecute(result)
+        }
+
     }
 
 

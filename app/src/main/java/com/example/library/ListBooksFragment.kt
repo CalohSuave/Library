@@ -24,6 +24,21 @@ class ListBooksFragment : Fragment() {
     private lateinit var listener: OnListBookCellPressed
 
 
+
+    companion object {
+
+
+        fun newInstance(query: String): ListBooksFragment{
+
+            val showDetailBook = ListBooksFragment()
+            val args = Bundle()
+            args.putString("query", query)
+            showDetailBook.arguments = args
+            return showDetailBook
+        }
+
+    }
+
     //BOTONES FRAGMENTS
     /** Fragment buttons*/
     interface OnListBookCellPressed {
@@ -38,6 +53,8 @@ class ListBooksFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+
+
     }
 
 
@@ -63,7 +80,15 @@ class ListBooksFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        queryBooks().execute()
+        var query = arguments!!.getString("query")
+
+        if(query == "none" ){
+
+
+        }else{
+            queryBooks().execute()
+        }
+
     }
 
 
@@ -98,7 +123,10 @@ class ListBooksFragment : Fragment() {
             else ->
                 super.onOptionsItemSelected(item)
         })
+
     }
+
+
 
 
     //TASK PARA HACER LA LLAMADA A LA API
@@ -110,9 +138,10 @@ class ListBooksFragment : Fragment() {
          * @return asnwerApi String of the answer of the API
          * */
         override fun doInBackground(vararg params: String?): String {
+            var query = arguments!!.getString("query")
 
             var asnwerApi: String = ""
-            val url = URL("https://www.googleapis.com/books/v1/volumes?q=Harry&maxResults=10&printType=books")
+            val url = URL("https://www.googleapis.com/books/v1/volumes?q=$query&maxResults=10&printType=books")
             val connection = url.openConnection() as HttpURLConnection
             connection.connect()
             val rd = BufferedReader(InputStreamReader(connection.inputStream) as Reader?)

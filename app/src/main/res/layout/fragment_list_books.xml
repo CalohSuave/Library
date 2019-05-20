@@ -8,5 +8,5 @@
     <ListView
         android:id="@+id/lista"
         android:layout_width="match_parent"
-        android:layout_height="652dp"/>
+        android:layout_height="wrap_content" />
 </FrameLayout>
