@@ -54,8 +54,6 @@ class ShowDetailBookFragment : androidx.fragment.app.Fragment() {
                 userBookDao.insertFavoriteBook(userBook)
             }
         }
-        var someList : Array<UserBook> = arrayOf(userBook)
-        someList.forEach(System.out::print)
 
         /*
         val userBookDao = UsersDatabase.getInstance(context!!).userBookDao()
