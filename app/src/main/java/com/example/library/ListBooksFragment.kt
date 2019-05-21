@@ -45,6 +45,7 @@ class ListBooksFragment : Fragment() {
     interface OnListBookCellPressed {
         fun onButton(books: Book)
         fun goLogin()
+        fun goToFav()
     }
 
     //PARA ACTIVAR EL TOOLBAR
@@ -83,12 +84,24 @@ class ListBooksFragment : Fragment() {
 
         val query = arguments!!.getString("query")
 
-
         if(query == "none" ){
 
         }else{
             queryBooks().execute()
         }
+
+
+
+        /*
+        if(libro.isEmpty()){
+            if(query == "none" ){
+
+            }else{
+                queryBooks().execute()
+            }
+        }*/
+
+
 
     }
 
@@ -121,6 +134,11 @@ class ListBooksFragment : Fragment() {
                 listener.goLogin()
                 true
             }
+
+            R.id.fav_books ->{
+                listener.goToFav()
+                true
+            }
             else ->
                 super.onOptionsItemSelected(item)
         })
@@ -141,6 +159,8 @@ class ListBooksFragment : Fragment() {
          * */
         override fun doInBackground(vararg params: String?): String {
             val query = arguments!!.getString("query")
+
+
 
             var asnwerApi: String = ""
             val url = URL("https://www.googleapis.com/books/v1/volumes?q=$query&maxResults=5&printType=books")
@@ -169,6 +189,7 @@ class ListBooksFragment : Fragment() {
             try {
                 showList()
 
+
             } catch (e: IllegalStateException){
                 e.message
             }
@@ -188,6 +209,7 @@ class ListBooksFragment : Fragment() {
         val itemsArray = jsonObject.getJSONArray("items")
         var i = 0
 
+        libro.clear()
         while (i < itemsArray.length()) {
 
             try {

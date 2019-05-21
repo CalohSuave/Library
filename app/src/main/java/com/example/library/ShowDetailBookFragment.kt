@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_show_detail_book.*
 import com.bumptech.glide.Glide
 import com.example.library.RoomDataBase.UserBook
@@ -53,6 +54,8 @@ class ShowDetailBookFragment : androidx.fragment.app.Fragment() {
             doAsync {
                 userBookDao.insertFavoriteBook(userBook)
             }
+
+            Toast.makeText(activity, "Se ha guardado el libro "+libro.title, Toast.LENGTH_LONG).show()
         }
 
         /*
@@ -100,13 +103,6 @@ class ShowDetailBookFragment : androidx.fragment.app.Fragment() {
         Glide.with(context!!).load(libro.cover).into(iv_portrait_logo_show_info_book)
         tv_nameBook.text = libro.title
         tv_description.text = libro.description
-    }
-
-    fun saveBook(libro: Book){
-
-        var title = libro.title
-        var logo = libro.cover
-
     }
 
 
