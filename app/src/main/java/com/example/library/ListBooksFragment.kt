@@ -83,12 +83,24 @@ class ListBooksFragment : Fragment() {
 
         val query = arguments!!.getString("query")
 
-
         if(query == "none" ){
 
         }else{
             queryBooks().execute()
         }
+
+
+
+        /*
+        if(libro.isEmpty()){
+            if(query == "none" ){
+
+            }else{
+                queryBooks().execute()
+            }
+        }*/
+
+
 
     }
 
@@ -142,6 +154,8 @@ class ListBooksFragment : Fragment() {
         override fun doInBackground(vararg params: String?): String {
             val query = arguments!!.getString("query")
 
+
+
             var asnwerApi: String = ""
             val url = URL("https://www.googleapis.com/books/v1/volumes?q=$query&maxResults=5&printType=books")
             val connection = url.openConnection() as HttpURLConnection
@@ -169,6 +183,7 @@ class ListBooksFragment : Fragment() {
             try {
                 showList()
 
+
             } catch (e: IllegalStateException){
                 e.message
             }
@@ -188,6 +203,7 @@ class ListBooksFragment : Fragment() {
         val itemsArray = jsonObject.getJSONArray("items")
         var i = 0
 
+        libro.clear()
         while (i < itemsArray.length()) {
 
             try {

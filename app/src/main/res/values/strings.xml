@@ -21,9 +21,9 @@
     <string name="iv_portrait_detail">TODO</string>
     <string name="tv_namebook">tv_nameBook</string>
     <string name="Example_text">example_example_exampleexample_example_exampleexample_example_exampleexample_example_exampleexample_example_exampleexample_example_example</string>
-    <string name="add_to_fav">Add to Fav</string>
     <string name="delete_fav">Delete Fav</string>
     <string name="search">Search</string>
+    <string name="Add_to_fav">Add to Fav</string>
 
     <string-array name="NameErrors">
         <item>Inserte un valor</item>
