@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity(), OnListBookCellPressed, OnLoginFragment
 
 
     override fun goLogin() {
-        finish()
+
         val gotoLogin = Intent(this, MainActivity::class.java)
         startActivity(gotoLogin)
     }
@@ -34,20 +34,18 @@ class MainActivity : AppCompatActivity(), OnListBookCellPressed, OnLoginFragment
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
         val listBooks = ListBooksFragment.newInstance("none")
-        supportFragmentManager.beginTransaction().replace(R.id.maincontainer, listBooks).addToBackStack(null).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.maincontainer, listBooks).commit()
 
     }
 
     override fun goToRegisterFragment(email: String, password: String) {
         val registerFragment = RegisterFragment.newInstance(email, password)
-        supportFragmentManager.beginTransaction().replace(R.id.maincontainer, registerFragment).addToBackStack(null)
-            .commit()
+        supportFragmentManager.beginTransaction().replace(R.id.maincontainer, registerFragment).commit()
     }
 
     override fun onRegisterButtonPressed(name: String, email: String, Password: String) {
         val loginFragment = LoginFragment.newInstance(email, Password)
-        supportFragmentManager.beginTransaction().replace(R.id.maincontainer, loginFragment).addToBackStack(null)
-            .commit()
+        supportFragmentManager.beginTransaction().replace(R.id.maincontainer, loginFragment).commit()
     }
 
     override fun onButton(books: Book) {

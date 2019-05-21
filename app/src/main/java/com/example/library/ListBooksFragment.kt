@@ -5,15 +5,16 @@ import android.os.AsyncTask
 import android.os.Bundle
 import android.view.*
 import android.widget.AdapterView
-import android.widget.Toast
+
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.activity_main.*
+
 import kotlinx.android.synthetic.main.fragment_list_books.*
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.io.Reader
+import java.lang.NullPointerException
 import java.lang.RuntimeException
 import java.net.HttpURLConnection
 import java.net.URL
@@ -22,7 +23,6 @@ class ListBooksFragment : Fragment() {
 
     /** List with all the books*/
     var libro: ArrayList<Book> = ArrayList()
-
     /** Listener of the BookCell*/
     private lateinit var listener: OnListBookCellPressed
 
@@ -220,13 +220,17 @@ class ListBooksFragment : Fragment() {
 
     /** Shows the list of books*/
     private fun showList(){
-        val adapter = CustomAdapter(context!!, libro)
-        lista.adapter = adapter
+        try {
+            val adapter = CustomAdapter(context!!, libro)
+            lista.adapter = adapter
+            lista.setOnItemClickListener { _: AdapterView<*>, _: View, position: Int, _: Long ->
+                listener.onButton(libro[position])
+            }
 
-        lista.setOnItemClickListener { _: AdapterView<*>, _: View, position: Int, _: Long ->
-            listener.onButton(libro[position])
+        }catch (e : NullPointerException){
+            e.printStackTrace()
+
         }
-
     }
 
 }
