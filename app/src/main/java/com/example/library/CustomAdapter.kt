@@ -1,15 +1,15 @@
 package com.example.library
-
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.detail_item.view.*
+
+
 
 class CustomAdapter(private val context: Context, private val items:ArrayList<Book>): BaseAdapter(){
 
@@ -22,10 +22,11 @@ class CustomAdapter(private val context: Context, private val items:ArrayList<Bo
      * */
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
-
         // SI PONES PARENT NO APARECE
+        /** The inflated view */
         val vista: View = convertView ?: LayoutInflater.from(context).inflate(R.layout.detail_item, null)
 
+        /** Vista tag*/
         val holder: ViewHolder = vista.tag as? ViewHolder ?: ViewHolder(vista)
         vista.tag = holder
         /*
@@ -40,12 +41,14 @@ class CustomAdapter(private val context: Context, private val items:ArrayList<Bo
         }
         */
 
+        /** Item in a certain position of the list*/
         val item = getItem(position)
 
         holder.titulo.text= item.title
         Glide.with(context)
             .load(item.cover)
             .into(holder.cover!!)
+
 
 
 
@@ -84,11 +87,17 @@ class CustomAdapter(private val context: Context, private val items:ArrayList<Bo
         return items.count()
     }
 
-
+    /**
+     * Creates the list of books
+     * @param vista where the list will be created
+     * */
     private class ViewHolder(vista: View){
+        /** the title it will be shown in each item of the list*/
         val titulo: TextView = vista.tv_title_detail
-        val cover: ImageView = vista.iv_portrait_detail
+        /** the cover (image) that will be shown in each item of the list*/
+        val cover: ImageView = vista.iv_portrait_logo
         /*val favourite: TextView = vista.cb_detail*/
+
     }
 
 

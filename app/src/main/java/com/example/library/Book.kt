@@ -10,9 +10,16 @@ import android.os.Parcelable
  * @param favourite Book is in a favourite list
  */
 class Book(title:String, cover:String, description:String, favourite:Int):Parcelable {
+    /** Book Title */
     var title:String = ""
+
+    /** Book Cover */
     var cover:String = ""
+
+    /** Book description */
     var description:String = ""
+
+    /** If the book is in the users favourite list the value si 1 else 0 */
     var favourite:Int = 0
 
     /**
@@ -53,14 +60,31 @@ class Book(title:String, cover:String, description:String, favourite:Int):Parcel
     }
 
     companion object CREATOR : Parcelable.Creator<Book> {
+        /**
+         * Creates an empty book
+         * @param title is {@value #""}
+         * @param cover is {@value #""}
+         * @param description is {@value #""}
+         * @param favourite is {@value #0}
+         * */
         fun getEmptyLibro(): Book {
             return Book(title = " ",cover = " " ,description = " ",favourite = 0)
         }
+
+        /**
+         * Creates a book from the parcel
+         * @param parcel is the parcel used to create the book
+         * @return the created Book
+         * */
         override fun createFromParcel(parcel: Parcel): Book {
             return Book(parcel)
-
         }
 
+        /**
+         * Creates an array of nulls from the size entered
+         * @param size the size of the array
+         * @return Array of nulls with the specified size
+         * */
         override fun newArray(size: Int): Array<Book?> {
             return arrayOfNulls(size)
         }

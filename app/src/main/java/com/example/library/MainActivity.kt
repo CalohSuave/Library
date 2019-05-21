@@ -9,7 +9,10 @@ import com.example.library.RegisterFragment.OnRegisterFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity(), OnListBookCellPressed, OnLoginFragmentPressed, OnRegisterFragment{
+class MainActivity : AppCompatActivity(), OnListBookCellPressed, OnLoginFragmentPressed, OnRegisterFragment, android.widget.SearchView.OnQueryTextListener {
+
+    private var querySearch="none"
+
 
     override fun goLogin() {
         finish()
@@ -26,7 +29,7 @@ class MainActivity : AppCompatActivity(), OnListBookCellPressed, OnLoginFragment
 
     override fun isUserOnDataBase(currentUserId: Int) {
         CurrentUser.id = currentUserId
-        val listBooks = ListBooksFragment()
+        val listBooks = ListBooksFragment.newInstance("none")
         supportFragmentManager.beginTransaction().replace(R.id.maincontainer, listBooks).addToBackStack(null).commit()
 
     }
@@ -59,6 +62,14 @@ class MainActivity : AppCompatActivity(), OnListBookCellPressed, OnLoginFragment
         setSupportActionBar(toolbar as Toolbar)
 
 
+        search_books.setOnCloseListener {
+            !search_books.isIconified
+        }
+
+        search_books.setOnQueryTextListener(this)
+
+
+
         if(savedInstanceState == null) {
             val LoginFrag = LoginFragment.newInstance("","")
             supportFragmentManager.beginTransaction().replace(R.id.maincontainer, LoginFrag).commit()
@@ -66,6 +77,19 @@ class MainActivity : AppCompatActivity(), OnListBookCellPressed, OnLoginFragment
 
 
     }
+
+    override fun onQueryTextSubmit(p0: String?): Boolean {
+        querySearch = p0.toString()
+        val listBooksFragment = ListBooksFragment.newInstance(p0!!)
+        supportFragmentManager.beginTransaction().replace(R.id.maincontainer, listBooksFragment).commit()
+        return false
+    }
+
+    override fun onQueryTextChange(p0: String?): Boolean {
+
+        return false
+    }
+
 
 /*    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)

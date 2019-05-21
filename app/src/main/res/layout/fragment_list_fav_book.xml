@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ListFavouriteFragment">
+    tools:context=".ListFavBook">
 
     <ListView
-        android:id="@+id/list_favourite_book"
+        android:id="@+id/lista_fav"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </FrameLayout>
