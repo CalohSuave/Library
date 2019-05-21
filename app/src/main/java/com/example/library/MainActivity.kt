@@ -10,10 +10,19 @@ import com.example.library.RegisterFragment.OnRegisterFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity(), OnListBookCellPressed, OnLoginFragmentPressed, OnRegisterFragment, android.widget.SearchView.OnQueryTextListener {
+class MainActivity : AppCompatActivity(), OnListBookCellPressed, OnLoginFragmentPressed, OnRegisterFragment, android.widget.SearchView.OnQueryTextListener, ListFavBook.OnFragmentInteractionListener {
+    override fun onFragmentInteraction() {
+        
+    }
+
 
     private var querySearch="none"
 
+    override fun goToFav() {
+        search_books.visibility = View.INVISIBLE
+        val FragFav = ListFavBook()
+        supportFragmentManager.beginTransaction().replace(R.id.maincontainer, FragFav).addToBackStack("null").commit()
+    }
 
     override fun goLogin() {
 

@@ -45,6 +45,7 @@ class ListBooksFragment : Fragment() {
     interface OnListBookCellPressed {
         fun onButton(books: Book)
         fun goLogin()
+        fun goToFav()
     }
 
     //PARA ACTIVAR EL TOOLBAR
@@ -131,6 +132,11 @@ class ListBooksFragment : Fragment() {
         return (when (item.itemId) {
             R.id.log_out -> {
                 listener.goLogin()
+                true
+            }
+
+            R.id.fav_books ->{
+                listener.goToFav()
                 true
             }
             else ->
