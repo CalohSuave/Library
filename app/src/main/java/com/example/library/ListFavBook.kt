@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.library.RoomDataBase.UserBook
+import com.example.library.RoomDataBase.UsersDatabase
+import kotlinx.android.synthetic.main.fragment_show_detail_book.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -32,8 +35,18 @@ class ListFavBook : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        val userBookDao = UsersDatabase.getInstance(context!!).userBookDao()
+        val userBook: UserBook = UserBook(tv_nameBook.text.toString(), CurrentUser.id)
+        val userArray:ArrayList<String> = userBookDao.getAll(CurrentUser.id)
+
+        for (i in 0..userArray.size-1){
+            println(userArray[i])
+        }
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_list_fav_book, container, false)
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
