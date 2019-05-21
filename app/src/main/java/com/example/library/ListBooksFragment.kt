@@ -143,11 +143,10 @@ class ListBooksFragment : Fragment() {
             val query = arguments!!.getString("query")
 
             var asnwerApi: String = ""
-            val url = URL("https://www.googleapis.com/books/v1/volumes?q=$query&maxResults=10&printType=books")
+            val url = URL("https://www.googleapis.com/books/v1/volumes?q=$query&maxResults=5&printType=books")
             val connection = url.openConnection() as HttpURLConnection
             connection.connect()
             val rd = BufferedReader(InputStreamReader(connection.inputStream) as Reader?)
-
 
             var s = rd.readLine()
             while (s != null) {
@@ -156,7 +155,7 @@ class ListBooksFragment : Fragment() {
             }
             parseBooks(asnwerApi)
 
-            // Return the raw response.
+            // Return the raw response
             return asnwerApi
         }
 
