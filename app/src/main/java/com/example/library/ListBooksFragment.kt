@@ -1,10 +1,13 @@
 package com.example.library
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.AsyncTask
 import android.os.Bundle
 import android.view.*
 import android.widget.AdapterView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_list_books.*
 import org.json.JSONException
 import org.json.JSONObject
@@ -22,8 +25,6 @@ class ListBooksFragment : Fragment() {
 
     /** Listener of the BookCell*/
     private lateinit var listener: OnListBookCellPressed
-
-
 
     companion object {
 
@@ -80,10 +81,10 @@ class ListBooksFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var query = arguments!!.getString("query")
+        val query = arguments!!.getString("query")
+
 
         if(query == "none" ){
-
 
         }else{
             queryBooks().execute()
@@ -131,6 +132,7 @@ class ListBooksFragment : Fragment() {
 
     //TASK PARA HACER LA LLAMADA A LA API
     /** All the tasks to call the API */
+    @SuppressLint("StaticFieldLeak")
     internal inner class queryBooks : AsyncTask<String, String, String>() {
         /**
          * Calls the API on the background
@@ -138,7 +140,7 @@ class ListBooksFragment : Fragment() {
          * @return asnwerApi String of the answer of the API
          * */
         override fun doInBackground(vararg params: String?): String {
-            var query = arguments!!.getString("query")
+            val query = arguments!!.getString("query")
 
             var asnwerApi: String = ""
             val url = URL("https://www.googleapis.com/books/v1/volumes?q=$query&maxResults=10&printType=books")

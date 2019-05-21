@@ -2,6 +2,7 @@ package com.example.library
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.widget.Toolbar
 import com.example.library.ListBooksFragment.OnListBookCellPressed
 import com.example.library.LoginFragment.OnLoginFragmentPressed
@@ -29,6 +30,9 @@ class MainActivity : AppCompatActivity(), OnListBookCellPressed, OnLoginFragment
 
     override fun isUserOnDataBase(currentUserId: Int) {
         CurrentUser.id = currentUserId
+        search_books.visibility = View.VISIBLE
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+
         val listBooks = ListBooksFragment.newInstance("none")
         supportFragmentManager.beginTransaction().replace(R.id.maincontainer, listBooks).addToBackStack(null).commit()
 
@@ -68,6 +72,7 @@ class MainActivity : AppCompatActivity(), OnListBookCellPressed, OnLoginFragment
 
         search_books.setOnQueryTextListener(this)
 
+        search_books.visibility = View.INVISIBLE
 
 
         if(savedInstanceState == null) {
