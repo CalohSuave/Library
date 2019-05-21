@@ -1,5 +1,4 @@
 package com.example.library
-
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
@@ -7,10 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-import com.example.library.RoomDataBase.UserBook
-import com.example.library.RoomDataBase.UsersDatabase
-import kotlinx.android.synthetic.main.fragment_show_detail_book.*
 import kotlinx.android.synthetic.main.fragment_list_fav_book.*
 
 
@@ -36,31 +31,14 @@ class ListFavBook : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
-
             param2 = it.getString(ARG_PARAM2)
         }
     }
 
     override fun onCreateView(
-<<<<<<< HEAD
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        val userBookDao = UsersDatabase.getInstance(context!!).userBookDao()
-        val userBook: UserBook = UserBook(tv_nameBook.text.toString(), CurrentUser.id)
-        val userArray:ArrayList<String> = userBookDao.getAll(CurrentUser.id)
-
-        for (i in 0..userArray.size-1){
-            println(userArray[i])
-        }
-
-=======
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
->>>>>>> 8917842729921ac48dd7510ee9c386bfd3a64367
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_list_fav_book, container, false)
-
     }
 
 
