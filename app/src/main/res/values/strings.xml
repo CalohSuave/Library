@@ -24,6 +24,8 @@
     <string name="delete_fav">Delete Fav</string>
     <string name="search">Search</string>
     <string name="Add_to_fav">Add to Fav</string>
+    <string name="name_book_fav">book_favoruite</string>
+    <string name="delete_book">Delete Book</string>
 
     <string-array name="NameErrors">
         <item>Inserte un valor</item>

@@ -1,12 +1,16 @@
 package com.example.library
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+
+import com.example.library.RoomDataBase.UsersDatabase
 import kotlinx.android.synthetic.main.fragment_list_fav_book.*
+import org.jetbrains.anko.doAsync
+
+import java.lang.NullPointerException
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -21,6 +25,9 @@ class ListFavBook : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var listener: OnFragmentInteractionListener
+
+    var libros_fav: ArrayList<String> = ArrayList()
+
 
     interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
@@ -38,6 +45,21 @@ class ListFavBook : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
+
+        doAsync {
+            val userBookDao = UsersDatabase.getInstance(context!!).userBookDao()
+            val number_books = userBookDao.getCountAll(CurrentUser.id)
+            val favList:List<String> = userBookDao.getAll(CurrentUser.id)
+            for (i in 0..number_books){
+                val nombreBook = favList[i]
+                libros_fav.add(nombreBook)
+            }
+
+
+        }
+
+
+
         return inflater.inflate(R.layout.fragment_list_fav_book, container, false)
     }
 
@@ -46,11 +68,7 @@ class ListFavBook : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        bt_fav_fragment.setOnClickListener {
-
-
-            listener.onFragmentInteraction()
-        }
+        showList()
     }
 
 
@@ -78,4 +96,20 @@ class ListFavBook : Fragment() {
                 }
             }
     }
+
+    private fun showList(){
+        try {
+            val adapter = CustomAdapterFavBooks(context!!, libros_fav)
+            lista_favoritos.adapter = adapter
+
+
+        }catch (e : NullPointerException){
+            e.printStackTrace()
+
+        }
+    }
+
+
+
+
 }
